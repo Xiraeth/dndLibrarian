@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/output.css')
+  body(class="text-white bg-[url('/images/bg_darkened.jpg')] bg-opacity-20 bg-no-repeat bg-center bg-fixed")
+    div(class="header py-4 px-10 flex flex-col justify-between items-center min-[400px]:flex-row")
+      a(href="/" class="xl:text-3xl text-xl py-5 font-cactus text-amber-300 hover:text-amber-500 transition-colors duration-150") Home
+      if currentUser 
+        div#connectButtons(class="text-lg xl:text-2xl flex gap-10")
+          a(href="/myCharacters")(class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Characters
+          a(href="/logout")(class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Logout
+        for character in currentUser.characters 
+          p= character.name
+      else
+        div#connectButtons(class="text-lg xl:text-2xl flex gap-10")
+          a(href="/login")(class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Log in
+          a(href="/signup")(class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Sign up
+    block content
