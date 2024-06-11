@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "devstart": "set DEBUG=myapp:* & npm start",
-    "tailwind": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch &"
+    "tailwind": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -2,7 +2,10 @@ extends layout
 
 block content
   if currentUser 
-    p.text-5xl.text-center.font-bold.pointer-events-none.select-none.text-amber-300.italic Welcome back, #{currentUser.username}!
+    p.text-center.font-bold.text-amber-300.italic.mb-20(class="xl:text-5xl sm:text-2xl text-base") Welcome back, #{currentUser.username}
+    p.text-center.text-blue-300.mb-20(class="xl:text-2xl sm:text-xl text-sm") You currently have no characters in your account. Click on the button below to create one.
+    a(href="/createCharacter")(class="text-emerald-300 w-20 h-20 rounded-lg border-2 border-emerald-300 bg-slate-800 hover:bg-slate-700 transition-colors duration-150 flex items-center justify-center mx-auto outline outline-1 outline-amber-300/50 shadow-md shadow-emerald-300/50") 
+      i(class="fa-solid fa-plus")
   else
     div#welcomeMsg.text-white.text-center.font-cactus.flex.flex-col.items-center.gap-10.mt-20.px-5(class="xl:text-3xl sm:text-lg text-base")
       p Welcome to #[i The Librarian], an application to store and view your D&amp;D characters

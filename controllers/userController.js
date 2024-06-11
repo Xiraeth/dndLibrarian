@@ -55,3 +55,9 @@ exports.createUser = [
     }
   }),
 ];
+
+exports.get_createCharacter = asyncHandler(async (req, res) => {
+  res.render("createCharacter", { title: "Character creation" });
+});
+
+// exports.post_createCharacter = asyncHandler(async (req, res, next) => {});

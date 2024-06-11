@@ -15,6 +15,8 @@ const indexRouter = require("./routes/index");
 const loginRouter = require("./routes/login");
 const signupRouter = require("./routes/signup");
 const logoutRouter = require("./routes/logout");
+const myCharactersRouter = require("./routes/myCharacters");
+const createCharacterRouter = require("./routes/createCharacter");
 
 require("dotenv").config();
 
@@ -35,6 +37,7 @@ async function main() {
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+// passport session setup
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
@@ -74,6 +77,7 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
+// create currentUser variable to use in pug files
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
@@ -86,10 +90,13 @@ app.use(cookieParser());
 app.use(compression());
 app.use(express.static(path.join(__dirname, "public")));
 
+// using routers
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/logout", logoutRouter);
+app.use("/myCharacters", myCharactersRouter);
+app.use("/createCharacter", createCharacterRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
