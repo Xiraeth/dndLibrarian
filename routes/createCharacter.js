@@ -5,4 +5,6 @@ const userController = require("../controllers/userController");
 
 router.get("/", userController.get_createCharacter);
 
+router.post("/", userController.post_createCharacter);
+
 module.exports = router;

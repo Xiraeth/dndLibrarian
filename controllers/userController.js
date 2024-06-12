@@ -56,8 +56,16 @@ exports.createUser = [
   }),
 ];
 
-exports.get_createCharacter = asyncHandler(async (req, res) => {
+exports.get_createCharacter = asyncHandler(async (req, res, next) => {
   res.render("createCharacter", { title: "Character creation" });
 });
 
-// exports.post_createCharacter = asyncHandler(async (req, res, next) => {});
+exports.post_createCharacter = [
+  body("dndName", "Name cannot be empty")
+    .trim()
+    .isLength({ min: 1, max: 16 })
+    .escape(),
+  body("dndClass", "Class field cannot be blank").escape(),
+  body("dndRace", "Race field cannot be blank").escape(),
+  body("dndBackground", "Background field cannot be blank").escape(),
+];

@@ -1,55 +1,70 @@
 extends layout
 
 block content 
-  form(method="POST" class="flex flex-col gap-y-10 sm:w-1/2 w-5/6 mx-auto bg-blue-400/10 rounded-lg py-10 shadow-md shadow-blue-300/50")
-    h1.text-center.text-amber-300.font-mont(class="xl:text-3xl sm:text-lg text-base") Create a character
-    .input-group.flex.flex-col.justify-center.items-center.px-5(class="sm:flex-row")
-      label(for="dndName" class="xl:text-xl text-md text-center sm:text-left mb-3") Name 
-      input(type="text" required autocomplete="off" id="dndName" name="dndName")
-    .input-group.flex.flex-col.justify-center.items-center.px-5(class="sm:flex-row")
-      label(for="dndClass" class="xl:text-xl text-md text-center sm:text-left mb-3") Class
-      select#dndClass(name="dndClass" required)
-        option(value="") -----------
-        option(value="barbarian") Barbarian
-        option(value="bard") Bard
-        option(value="cleric") Cleric
-        option(value="druid") Druid
-        option(value="fighter") Fighter
-        option(value="monk") Monk
-        option(value="paladin") Paladin
-        option(value="ranger") Ranger
-        option(value="rogue") Rogue
-        option(value="sorcerer") Sorcerer
-        option(value="warlock") Warlock
-        option(value="wizard") Wizard
-    .input-group.flex.flex-col.justify-center.items-center.px-5(class="sm:flex-row")
-      label(for="password" class="xl:text-xl text-md text-center sm:text-left mb-3") Race 
-      select#dndRace(name="dndRace" required)
-        option(value="") -----------
-        option(value="dragonborn") Dragonborn
-        option(value="dwarf") Dwarf
-        option(value="elf") Elf
-        option(value="gnome") Gnome
-        option(value="half-elf") Half-Elf
-        option(value="halfling") Halfling
-        option(value="half-orc") Half-Orc
-        option(value="human") Human
-        option(value="tiefling") Tiefling
-    .input-group.flex.flex-col.justify-center.items-center.px-5(class="sm:flex-row")
-      label(for="password" class="xl:text-xl text-md text-center sm:text-left mb-3") Background 
-      select#dndBackground(name="dndBackground" required)
-        option(value="") -----------
-        option(value="acolyte") Acolyte
-        option(value="charlatan") Charlatan
-        option(value="criminal") Criminal
-        option(value="entertainer") Entertainer
-        option(value="folk-hero") Folk Hero
-        option(value="guild-artisan") Guild Artisan
-        option(value="hermit") Hermit
-        option(value="noble") Noble
-        option(value="outlander") Outlander
-        option(value="sage") Sage 
-        option(value="sailor") Sailor 
-        option(value="soldier") Soldier
-        option(value="urchin") Urchin
-    button(type="submit" class="submitBtn bg-amber-400 hover:bg-amber-300 transition-all duration-150 text-black py-2 w-48 xl:text-xl text-md mx-auto rounded-md") Create character
+  if currentUser
+    form(method="POST" class="flex flex-col gap-y-10 sm:w-1/2 w-5/6 mx-auto bg-blue-400/10 rounded-lg pb-10 shadow-md shadow-blue-300/50")
+      //- h1.text-center.text-amber-300.font-mont(class="xl:text-3xl sm:text-lg text-base") Create a character
+      #tabsContainer.flex.justify-between.text-black.cursor-pointer.rounded-t-lg(class="xl:text-xl md:text-lg text-base")
+        button#detailsButton.mx-auto.rounded-t-xl.activeTab(type="button" class="hover:bg-teal-600 w-1/3 transition-colors duration-150" data-name="detailsTab") Details 
+        .separate.bg-black.w-px(class="h-1/6" )
+        button#abilitiesButton.mx-auto.rounded-t-xl(type="button" class="hover:bg-teal-600 w-1/3 transition-colors duration-150" data-name="abilitiesTab") Abilities 
+        .separate.bg-black.w-px(class="h-1/6")
+        button#backstoryButton.mx-auto.rounded-t-xl(type="button" class="hover:bg-teal-600 w-1/3 transition-colors duration-150" data-name="backstoryTab") Backstory
+
+      .tabsContent
+        .tabDetails.px-10#detailsTab
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="dndName" class="xl:text-xl text-md text-center md:text-left mb-3") Name 
+            input(type="text" required autocomplete="off" id="dndName" name="dndName")
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="dndClass" class="xl:text-xl text-md text-center md:text-left mb-3") Class
+            select#dndClass(name="dndClass" required)
+              option(value="") -----------
+              option(value="barbarian") Barbarian
+              option(value="bard") Bard
+              option(value="cleric") Cleric
+              option(value="druid") Druid
+              option(value="fighter") Fighter
+              option(value="monk") Monk
+              option(value="paladin") Paladin
+              option(value="ranger") Ranger
+              option(value="rogue") Rogue
+              option(value="sorcerer") Sorcerer
+              option(value="warlock") Warlock
+              option(value="wizard") Wizard
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="password" class="xl:text-xl text-md text-center md:text-left mb-3") Race 
+            select#dndRace(name="dndRace" required)
+              option(value="") -----------
+              option(value="dragonborn") Dragonborn
+              option(value="dwarf") Dwarf
+              option(value="elf") Elf
+              option(value="gnome") Gnome
+              option(value="half-elf") Half-Elf
+              option(value="halfling") Halfling
+              option(value="half-orc") Half-Orc
+              option(value="human") Human
+              option(value="tiefling") Tiefling
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="password" class="xl:text-xl text-md text-center md:text-left mb-3") Background 
+            input(type="text" autocomplete="off" id="dndBackground" name="dndBackground")
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="alignment" class="xl:text-xl text-md text-center md:text-left mb-3") Alignment 
+            select#alignment(name="alignment" required)
+              option(value="") -----------
+              option(value="lawful-good") Lawful Good
+              option(value="lawful-neutral") Lawful Neutral
+              option(value="lawful-evil") Lawful Evil
+              option(value="neutral-good") Neutral Good
+              option(value="true-neutral") True Neutral
+              option(value="neutral-evil") Neutral Evil
+              option(value="chaotic-good") Chaotic Good
+              option(value="chaotic-neutral") Chaotic Neutral
+              option(value="chaotic-evil") Chaotic Evil
+        .tabAbilities.px-10#abilitiesTab.hidden
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="strengthInput" class="xl:text-xl text-md text-center md:text-left mb-3") Strength 
+            input(type="number" required autocomplete="off" id="strengthInput" name="strengthInput")
+      button(type="submit" class="submitBtn bg-amber-400 hover:bg-amber-300 transition-all duration-150 text-black py-2 w-48 xl:text-xl text-md mx-auto rounded-md") Create character
+  else 
+    p.text-5xl.text-rose-600.text-center.mt-10 You do not have permission to access this page yet. Sign up or log in first.

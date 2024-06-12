@@ -1,20 +1,24 @@
 extends layout 
-block content 
-  form(method="POST" class="flex flex-col gap-y-10 sm:w-1/2 w-5/6 mx-auto bg-blue-400/10 rounded-lg py-10 shadow-md shadow-blue-300/50")
-    h1.text-center.text-amber-300.font-mont(class="xl:text-3xl sm:text-lg text-base") Create an account
-    .input-group.flex.flex-col.justify-center.items-center.px-5(class="sm:flex-row")
-      label(for="username")(class="xl:text-xl text-md text-center sm:text-left mb-3") Username
-      input(type="text" required autocomplete="off" id="username" name="username" autofocus value=(undefined===user ? '' : user.username))
-    .input-group.flex.flex-col.justify-center.items-center.px-5(class="sm:flex-row")
-      label(for="password")(class="xl:text-xl text-md text-center sm:text-left mb-3") Password
-      input(type="password" required autocomplete="off" id="password" name="password")
-    .input-group.flex.flex-col.justify-center.items-center.px-5(class="sm:flex-row")
-      label(for="passConfirm")(class="xl:text-xl text-md text-center sm:text-left mb-3") Confirm password
-      input(type="password" required autocomplete="off" id="passConfirm" name="passConfirm")
-    button(type="submit")(class="submitBtn bg-amber-400 hover:bg-amber-300 transition-all duration-150 text-black py-2 w-28 xl:text-xl text-md mx-auto rounded-md") Create
 
-    if errors
-      ul.mt-3
-        for error in errors 
-          li.my-3.py-2(class="text-center bg-rose-600/80 sm:text-xl text-base")= error.msg
+block content 
+  if currentUser
+    p.text-5xl.text-rose-600.text-center.mt-10 You are already logged in you scatterbrain. Logout if you want to sign up.
+  else 
+    form(method="POST" class="flex flex-col gap-y-10 sm:w-1/2 w-5/6 mx-auto bg-blue-400/10 rounded-lg py-10 shadow-md shadow-blue-300/50")
+      h1.text-center.text-amber-300.font-mont(class="xl:text-3xl sm:text-lg text-base") Create an account
+      .input-group.flex.flex-col.justify-center.items-center.px-5(class="sm:flex-row")
+        label(for="username")(class="xl:text-xl text-md text-center sm:text-left mb-3") Username
+        input(type="text" required autocomplete="off" id="username" name="username" autofocus value=(undefined===user ? '' : user.username))
+      .input-group.flex.flex-col.justify-center.items-center.px-5(class="sm:flex-row")
+        label(for="password")(class="xl:text-xl text-md text-center sm:text-left mb-3") Password
+        input(type="password" required autocomplete="off" id="password" name="password")
+      .input-group.flex.flex-col.justify-center.items-center.px-5(class="sm:flex-row")
+        label(for="passConfirm")(class="xl:text-xl text-md text-center sm:text-left mb-3") Confirm password
+        input(type="password" required autocomplete="off" id="passConfirm" name="passConfirm")
+      button(type="submit")(class="submitBtn bg-amber-400 hover:bg-amber-300 transition-all duration-150 text-black py-2 w-28 xl:text-xl text-md mx-auto rounded-md") Create
+
+      if errors
+        ul.mt-3
+          for error in errors 
+            li.my-3.py-2(class="text-center bg-rose-600/80 sm:text-xl text-base")= error.msg
     

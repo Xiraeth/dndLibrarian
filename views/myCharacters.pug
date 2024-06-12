@@ -1,4 +1,6 @@
 extends layout 
 
 block content 
-  h1.text-5xl.text-rose-600.text-center.mt-20 This page has not been built yet :)
+  p.text-center.text-blue-300.mb-20(class="xl:text-2xl sm:text-xl text-sm") You currently have no characters in your account. Click on the button below to create one.
+  a(href="/createCharacter" class="text-emerald-300 w-20 h-20 rounded-lg border-2 border-emerald-300 bg-slate-800 hover:bg-slate-700 transition-colors duration-150 flex items-center justify-center mx-auto outline outline-1 outline-amber-300/50 shadow-md shadow-emerald-300/50") 
+    i(class="fa-solid fa-plus")
