@@ -7,78 +7,103 @@ block content
       #tabsContainer.flex.justify-between.text-black.cursor-pointer.rounded-t-lg(class="xl:text-xl md:text-lg text-base")
         button#detailsButton.mx-auto.rounded-t-xl.activeTab.border-r-2.border-black(type="button" class="w-1/3 transition-colors duration-300" data-name="detailsTab") Details 
         button#abilitiesButton.mx-auto.rounded-t-xl.border-r-2.border-black(type="button" class="w-1/3 transition-colors duration-300" data-name="abilitiesTab") Abilities 
-        button#backstoryButton.mx-auto.rounded-t-xl(type="button" class="w-1/3 transition-colors duration-300" data-name="backstoryTab") Backstory
+        button#appearanceButton.mx-auto.rounded-t-xl(type="button" class="w-1/3 transition-colors duration-300" data-name="appearanceTab") Appearance
 
       .tabsContent
         .tabDetails.tab.px-10#detailsTab
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="dndName" class="xl:text-xl text-md text-center md:text-left mb-3") Name 
-            input(type="text" required autocomplete="off" id="dndName" name="dndName")
+            input(type="text" required autocomplete="off" id="dndName" name="dndName" value=(undefined === character ? '' : character.name))
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="dndClass" class="xl:text-xl text-md text-center md:text-left mb-3") Class
-            select#dndClass(name="dndClass" required)
-              option(value="") -----------
-              option(value="barbarian") Barbarian
-              option(value="bard") Bard
-              option(value="cleric") Cleric
-              option(value="druid") Druid
-              option(value="fighter") Fighter
-              option(value="monk") Monk
-              option(value="paladin") Paladin
-              option(value="ranger") Ranger
-              option(value="rogue") Rogue
-              option(value="sorcerer") Sorcerer
-              option(value="warlock") Warlock
-              option(value="wizard") Wizard
+            select#dndClass(name="dndClass" required value=(undefined === character ? '' : character.dndClass))
+              option(value="") Select a class
+              option(value="barbarian" selected=(character && character.class === 'barbarian' ? true : false)) Barbarian
+              option(value="bard" selected=(character && character.class === 'bard' ? true : false)) Bard
+              option(value="cleric" selected=(character && character.class === 'cleric' ? true : false)) Cleric
+              option(value="druid" selected=(character && character.class === 'druid' ? true : false)) Druid
+              option(value="fighter" selected=(character && character.class === 'fighter' ? true : false)) Fighter
+              option(value="monk" selected=(character && character.class === 'monk' ? true : false)) Monk
+              option(value="paladin" selected=(character && character.class === 'paladin' ? true : false)) Paladin
+              option(value="ranger" selected=(character && character.class === 'ranger' ? true : false)) Ranger
+              option(value="rogue" selected=(character && character.class === 'rogue' ? true : false)) Rogue
+              option(value="sorcerer" selected=(character && character.class === 'sorcerer' ? true : false)) Sorcerer
+              option(value="warlock" selected=(character && character.class === 'warlock' ? true : false)) Warlock
+              option(value="wizard" selected=(character && character.class === 'wizard' ? true : false)) Wizard
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
-            label(for="password" class="xl:text-xl text-md text-center md:text-left mb-3") Race 
+            label(for="dndRace" class="xl:text-xl text-md text-center md:text-left mb-3") Race 
             select#dndRace(name="dndRace" required)
-              option(value="") -----------
-              option(value="dragonborn") Dragonborn
-              option(value="dwarf") Dwarf
-              option(value="elf") Elf
-              option(value="gnome") Gnome
-              option(value="half-elf") Half-Elf
-              option(value="halfling") Halfling
-              option(value="half-orc") Half-Orc
-              option(value="human") Human
-              option(value="tiefling") Tiefling
+              option(value="") Select a race
+              option(value="dragonborn" selected=(character && character.race === 'dragonborn' ? true : false)) Dragonborn
+              option(value="dwarf" selected=(character && character.race === 'dwarf' ? true : false)) Dwarf
+              option(value="elf" selected=(character && character.race === 'elf' ? true : false)) Elf
+              option(value="gnome" selected=(character && character.race === 'gnome' ? true : false)) Gnome
+              option(value="half-elf" selected=(character && character.race === 'half-elf' ? true : false)) Half-Elf
+              option(value="halfling" selected=(character && character.race === 'halfling' ? true : false)) Halfling
+              option(value="half-orc" selected=(character && character.race === 'half-orc' ? true : false)) Half-Orc
+              option(value="human" selected=(character && character.race === 'human' ? true : false)) Human
+              option(value="tiefling" selected=(character && character.race === 'tiefling' ? true : false)) Tiefling
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
-            label(for="password" class="xl:text-xl text-md text-center md:text-left mb-3") Background 
-            input(type="text" autocomplete="off" id="dndBackground" name="dndBackground")
+            label(for="dndLevel" class="xl:text-xl text-md text-center md:text-left mb-3") Level 
+            input(type="number" required autocomplete="off" id="dndLevel" name="dndLevel" value=(undefined === character ? '' : character.level))
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
-            label(for="alignment" class="xl:text-xl text-md text-center md:text-left mb-3") Alignment 
-            select#alignment(name="alignment" required)
+            label(for="dndBackground" class="xl:text-xl text-md text-center md:text-left mb-3") Background 
+            input(type="text" autocomplete="off" id="dndBackground" name="dndBackground" value=(undefined === character ? '' : character.background))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="dndAlignment" class="xl:text-xl text-md text-center md:text-left mb-3") Alignment 
+            select#dndAlignment(name="dndAlignment" required)
               option(value="") -----------
-              option(value="lawful-good") Lawful Good
-              option(value="lawful-neutral") Lawful Neutral
-              option(value="lawful-evil") Lawful Evil
-              option(value="neutral-good") Neutral Good
-              option(value="true-neutral") True Neutral
-              option(value="neutral-evil") Neutral Evil
-              option(value="chaotic-good") Chaotic Good
-              option(value="chaotic-neutral") Chaotic Neutral
-              option(value="chaotic-evil") Chaotic Evil
+              option(value="lawful-good" selected=(character && character.alignment === 'lawful-good' ? true : false)) Lawful Good
+              option(value="lawful-neutral" selected=(character && character.alignment === 'lawful-neutral' ? true : false)) Lawful Neutral
+              option(value="lawful-evil" selected=(character && character.alignment === 'lawful-evil' ? true : false)) Lawful Evil
+              option(value="neutral-good" selected=(character && character.alignment === 'neutral-good' ? true : false)) Neutral Good
+              option(value="true-neutral" selected=(character && character.alignment === 'true-neutral' ? true : false)) True Neutral
+              option(value="neutral-evil" selected=(character && character.alignment === 'neutral-evil' ? true : false)) Neutral Evil
+              option(value="chaotic-good" selected=(character && character.alignment === 'chaotic-good' ? true : false)) Chaotic Good
+              option(value="chaotic-neutral" selected=(character && character.alignment === 'chaotic-neutral' ? true : false)) Chaotic Neutral
+              option(value="chaotic-evil" selected=(character && character.alignment === 'chaotic-evil' ? true : false)) Chaotic Evil
         .tabAbilities.tab.px-10#abilitiesTab.hidden
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="strengthInput" class="xl:text-xl text-md text-center md:text-left mb-3") Strength 
-            input(type="number" required autocomplete="off" id="strengthInput" name="strengthInput")
+            input(type="number" required autocomplete="off" id="strengthInput" name="strengthInput" value=(undefined === character ? '' : character.abilityScores.strength))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="dexterityInput" class="xl:text-xl text-md text-center md:text-left mb-3") Dexterity
+            input(type="number" required autocomplete="off" id="dexterityInput" name="dexterityInput" value=(undefined === character ? '' : character.abilityScores.dexterity))
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="constitutionInput" class="xl:text-xl text-md text-center md:text-left mb-3") Constitution 
-            input(type="number" required autocomplete="off" id="constitutionInput" name="constitutionInput")
-          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
-            label(for="dexterityInput" class="xl:text-xl text-md text-center md:text-left mb-3") Dexterity 
-            input(type="number" required autocomplete="off" id="dexterityInput" name="dexterityInput")
+            input(type="number" required autocomplete="off" id="constitutionInput" name="constitutionInput" value=(undefined === character ? '' : character.abilityScores.constitution))
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="intelligenceInput" class="xl:text-xl text-md text-center md:text-left mb-3") Intelligence 
-            input(type="number" required autocomplete="off" id="intelligenceInput" name="intelligenceInput")
-          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
-            label(for="charismaInput" class="xl:text-xl text-md text-center md:text-left mb-3") Charisma 
-            input(type="number" required autocomplete="off" id="charismaInput" name="charismaInput")
+            input(type="number" required autocomplete="off" id="intelligenceInput" name="intelligenceInput" value=(undefined === character ? '' : character.abilityScores.intelligence))
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="wisdomInput" class="xl:text-xl text-md text-center md:text-left mb-3") Wisdom 
-            input(type="number" required autocomplete="off" id="wisdomInput" name="wisdomInput")
-        .tabBackstory.tab.px-10#backstoryTab.hidden
+            input(type="number" required autocomplete="off" id="wisdomInput" name="wisdomInput" value=(undefined === character ? '' : character.abilityScores.wisdom))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="charismaInput" class="xl:text-xl text-md text-center md:text-left mb-3") Charisma 
+            input(type="number" required autocomplete="off" id="charismaInput" name="charismaInput" value=(undefined === character ? '' : character.abilityScores.charisma))
+        .tabAppearance.tab.px-10#appearanceTab.hidden
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="ageInput" class="xl:text-xl text-md text-center md:text-left mb-3") Age 
+            input(type="number" autocomplete="off" id="ageInput" name="ageInput" value=(undefined === character ? '' : character.age))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="heightInput" class="xl:text-xl text-md text-center md:text-left mb-3") Height
+            input(type="text" autocomplete="off" id="heightInput" name="heightInput" value=(undefined === character ? '' : character.height))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="weightInput" class="xl:text-xl text-md text-center md:text-left mb-3") Weight
+            input(type="text" autocomplete="off" id="weightInput" name="weightInput" value=(undefined === character ? '' : character.weight))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="eyesInput" class="xl:text-xl text-md text-center md:text-left mb-3") Eyes
+            input(type="text" autocomplete="off" id="eyesInput" name="eyesInput" value=(undefined === character ? '' : character.eyes))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="skinInput" class="xl:text-xl text-md text-center md:text-left mb-3") Skin
+            input(type="text" autocomplete="off" id="skinInput" name="skinInput" value=(undefined === character ? '' : character.skin))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="hairInput" class="xl:text-xl text-md text-center md:text-left mb-3") Hair
+            input(type="text" autocomplete="off" id="hairInput" name="hairInput" value=(undefined === character ? '' : character.hair))
+        if errors
+          ul.mt-3
+            for error in errors 
+              li.my-3.py-2(class="text-center bg-rose-600/80 sm:text-xl text-base")= error.msg
       button(type="submit" id="createCharButton" class="submitBtn bg-amber-400 hover:bg-amber-300 transition-all duration-150 text-black py-2 w-48 xl:text-xl text-md mx-auto rounded-md") Create character
   else 
     p.text-5xl.text-rose-600.text-center.mt-10 You do not have permission to access this page yet. Sign up or log in first.
