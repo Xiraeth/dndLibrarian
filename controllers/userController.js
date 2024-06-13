@@ -1,7 +1,8 @@
-const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
+
+const User = require("../models/user");
 
 exports.createUser = [
   body("username", "Username field cannot be empty")
@@ -67,5 +68,54 @@ exports.post_createCharacter = [
     .escape(),
   body("dndClass", "Class field cannot be blank").escape(),
   body("dndRace", "Race field cannot be blank").escape(),
-  body("dndBackground", "Background field cannot be blank").escape(),
+  body("dndAlignment", "Alignment field cannot be blank").escape(),
+  body("strengthInput")
+    .trim()
+    .custom((value, { req }) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("constitutionInput")
+    .trim()
+    .custom((value, { req }) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("dexterityInput")
+    .trim()
+    .custom((value, { req }) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("intelligenceInput")
+    .trim()
+    .custom((value, { req }) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("wisdomInput")
+    .trim()
+    .custom((value, { req }) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("charismaInput")
+    .trim()
+    .custom((value, { req }) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("strengthInput")
+    .trim()
+    .custom((value, { req }) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
 ];

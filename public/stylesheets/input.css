@@ -17,6 +17,7 @@
     font-family: cactus;
     background-color: #fcd34d;
     color: black;
+    height: 4rem;
   }
 
   #tabsContainer > button:hover:not(.activeTab) {
@@ -27,7 +28,6 @@
   #tabsContainer > .activeTab {
     background-color: #008080;
     color: white;
-    height: 4rem;
   }
 
   .input-group > label {
