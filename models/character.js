@@ -24,7 +24,25 @@ const CharacterSchema = new Schema({
     wisdom: { type: Number },
     charisma: { type: Number },
   },
+  skillProficiencies: [{ type: String }],
+  savingThrowProficiencies: [{ type: String }],
+  otherProficiencies: [{ type: String }],
+  languages: [{ type: String }],
   spells: [{ type: String }],
+  inspiration: { type: Number },
+  proficiencyBonus: { type: Number },
+  armorClass: { type: Number },
+  initiative: { type: Number },
+  speed: { type: Number },
+  maxHP: { type: Number },
+  currentHP: { type: Number },
+  temporaryHP: { type: Number },
+  hitDice: { type: Number },
+  equipment: [{ type: String }],
+  personalityTraits: { type: String },
+  ideals: { type: String },
+  bonds: { type: String },
+  flaws: { type: String },
   age: { type: Number, required: false },
   height: { type: Number, required: false },
   weight: { type: Number, required: false },
@@ -68,75 +86,75 @@ CharacterSchema.virtual("charismaModifier").get(function () {
 
 // Virtuals for skills
 CharacterSchema.virtual("acrobatics").get(function () {
-  return { value: this.skills.acrobatics, score: "Dexterity" };
+  return Math.floor((this.abilityScores.dexterity - 10) / 2);
 });
 
 CharacterSchema.virtual("animalHandling").get(function () {
-  return { value: this.skills.animalHandling, score: "Wisdom" };
+  return Math.floor((this.abilityScores.wisdom - 10) / 2);
 });
 
 CharacterSchema.virtual("arcana").get(function () {
-  return { value: this.skills.arcana, score: "Intelligence" };
+  return Math.floor((this.abilityScores.intelligence - 10) / 2);
 });
 
 CharacterSchema.virtual("athletics").get(function () {
-  return { value: this.skills.athletics, score: "Strength" };
+  return Math.floor((this.abilityScores.strength - 10) / 2);
 });
 
 CharacterSchema.virtual("deception").get(function () {
-  return { value: this.skills.deception, score: "Charisma" };
+  return Math.floor((this.abilityScores.charisma - 10) / 2);
 });
 
 CharacterSchema.virtual("history").get(function () {
-  return { value: this.skills.history, score: "Intelligence" };
+  return Math.floor((this.abilityScores.intelligence - 10) / 2);
 });
 
 CharacterSchema.virtual("insight").get(function () {
-  return { value: this.skills.insight, score: "Wisdom" };
+  return Math.floor((this.abilityScores.wisdom - 10) / 2);
 });
 
 CharacterSchema.virtual("intimidation").get(function () {
-  return { value: this.skills.intimidation, score: "Charisma" };
+  return Math.floor((this.abilityScores.charisma - 10) / 2);
 });
 
 CharacterSchema.virtual("investigation").get(function () {
-  return { value: this.skills.investigation, score: "Intelligence" };
+  return Math.floor((this.abilityScores.intelligence - 10) / 2);
 });
 
 CharacterSchema.virtual("medicine").get(function () {
-  return { value: this.skills.medicine, score: "Wisdom" };
+  return Math.floor((this.abilityScores.wisdom - 10) / 2);
 });
 
 CharacterSchema.virtual("nature").get(function () {
-  return { value: this.skills.nature, score: "Intelligence" };
+  return Math.floor((this.abilityScores.intelligence - 10) / 2);
 });
 
 CharacterSchema.virtual("perception").get(function () {
-  return { value: this.skills.perception, score: "Wisdom" };
+  return Math.floor((this.abilityScores.wisdom - 10) / 2);
 });
 
 CharacterSchema.virtual("performance").get(function () {
-  return { value: this.skills.performance, score: "Charisma" };
+  return Math.floor((this.abilityScores.charisma - 10) / 2);
 });
 
 CharacterSchema.virtual("persuasion").get(function () {
-  return { value: this.skills.persuasion, score: "Charisma" };
+  return Math.floor((this.abilityScores.charisma - 10) / 2);
 });
 
 CharacterSchema.virtual("religion").get(function () {
-  return { value: this.skills.religion, score: "Intelligence" };
+  return Math.floor((this.abilityScores.intelligence - 10) / 2);
 });
 
 CharacterSchema.virtual("sleightOfHand").get(function () {
-  return { value: this.skills.sleightOfHand, score: "Dexterity" };
+  return Math.floor((this.abilityScores.dexterity - 10) / 2);
 });
 
 CharacterSchema.virtual("stealth").get(function () {
-  return { value: this.skills.stealth, score: "Dexterity" };
+  return Math.floor((this.abilityScores.dexterity - 10) / 2);
 });
 
 CharacterSchema.virtual("survival").get(function () {
-  return { value: this.skills.survival, score: "Wisdom" };
+  return Math.floor((this.abilityScores.wisdom - 10) / 2);
 });
 
 CharacterSchema.set("toJSON", { virtuals: true });

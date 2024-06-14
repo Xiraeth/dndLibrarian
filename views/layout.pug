@@ -5,15 +5,13 @@ html
     link(rel='stylesheet', href='/stylesheets/output.css')
     script(src="/javascripts/tabControl.js" defer)
     script(src="https://kit.fontawesome.com/00de2a7224.js" crossorigin="anonymous")
-  body(class="text-white bg-[url('/images/bg_darkened.jpg')] bg-opacity-20 bg-no-repeat bg-center bg-fixed")
-    div(class="header py-4 px-10 flex flex-col justify-between items-center min-[400px]:flex-row")
+  body(class="text-white bg-[url('/images/bg.jpg')] bg-no-repeat bg-center bg-fixed min-h-screen")
+    div(class="header py-4 px-10 flex justify-between items-center")
       a(href="/" class="xl:text-3xl text-xl py-5 font-cactus text-amber-300 hover:text-amber-500 transition-colors duration-150") Home
       if currentUser 
         div#connectButtons(class="text-lg xl:text-2xl flex gap-10")
-          a(href="/myCharacters" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Characters
+          //- a(href="/myCharacters" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Characters
           a(href="/logout" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Logout
-        for character in currentUser.characters 
-          p= character.name
       else
         div#connectButtons(class="text-lg xl:text-2xl flex gap-10")
           a(href="/login" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Log in

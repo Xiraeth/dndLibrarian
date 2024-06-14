@@ -3,6 +3,18 @@ const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 
 const User = require("../models/user");
+const Character = require("../models/character");
+
+exports.renderHomePage = asyncHandler(async (req, res, next) => {
+  let characters = [];
+
+  if (req.user) {
+    const user = await User.findById(req.user._id).populate("characters");
+    characters = user.characters;
+  }
+
+  res.render("index", { title: "The Librarian", characters });
+});
 
 exports.createUser = [
   body("username", "Username field cannot be empty")

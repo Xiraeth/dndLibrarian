@@ -3,7 +3,16 @@ const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 
 const Character = require("../models/character");
-const character = require("../models/character");
+const User = require("../models/user");
+
+exports.renderCharacters = asyncHandler(async (req, res, next) => {
+  const charId = req.params.id;
+  const character = await Character.findById(charId);
+
+  console.log(character);
+
+  res.render("myCharacters");
+});
 
 exports.get_createCharacter = asyncHandler(async (req, res, next) => {
   res.render("createCharacter", { title: "Character creation" });
@@ -109,6 +118,8 @@ exports.post_createCharacter = [
       });
     } else {
       await character.save();
+      user.characters.push(character._id);
+      await user.save();
       res.redirect("/");
     }
   }),

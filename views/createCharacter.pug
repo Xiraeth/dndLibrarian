@@ -18,31 +18,32 @@ block content
             label(for="dndClass" class="xl:text-xl text-md text-center md:text-left mb-3") Class
             select#dndClass(name="dndClass" required value=(undefined === character ? '' : character.dndClass))
               option(value="") Select a class
-              option(value="barbarian" selected=(character && character.class === 'barbarian' ? true : false)) Barbarian
-              option(value="bard" selected=(character && character.class === 'bard' ? true : false)) Bard
-              option(value="cleric" selected=(character && character.class === 'cleric' ? true : false)) Cleric
-              option(value="druid" selected=(character && character.class === 'druid' ? true : false)) Druid
-              option(value="fighter" selected=(character && character.class === 'fighter' ? true : false)) Fighter
-              option(value="monk" selected=(character && character.class === 'monk' ? true : false)) Monk
-              option(value="paladin" selected=(character && character.class === 'paladin' ? true : false)) Paladin
-              option(value="ranger" selected=(character && character.class === 'ranger' ? true : false)) Ranger
-              option(value="rogue" selected=(character && character.class === 'rogue' ? true : false)) Rogue
-              option(value="sorcerer" selected=(character && character.class === 'sorcerer' ? true : false)) Sorcerer
-              option(value="warlock" selected=(character && character.class === 'warlock' ? true : false)) Warlock
-              option(value="wizard" selected=(character && character.class === 'wizard' ? true : false)) Wizard
+              option(value="Barbarian" selected=(character && character.class === 'barbarian' ? true : false)) Barbarian
+              option(value="Bard" selected=(character && character.class === 'bard' ? true : false)) Bard
+              option(value="Cleric" selected=(character && character.class === 'cleric' ? true : false)) Cleric
+              option(value="Druid" selected=(character && character.class === 'druid' ? true : false)) Druid
+              option(value="Fighter" selected=(character && character.class === 'fighter' ? true : false)) Fighter
+              option(value="Monk" selected=(character && character.class === 'monk' ? true : false)) Monk
+              option(value="Paladin" selected=(character && character.class === 'paladin' ? true : false)) Paladin
+              option(value="Ranger" selected=(character && character.class === 'ranger' ? true : false)) Ranger
+              option(value="Rogue" selected=(character && character.class === 'rogue' ? true : false)) Rogue
+              option(value="Sorcerer" selected=(character && character.class === 'sorcerer' ? true : false)) Sorcerer
+              option(value="Warlock" selected=(character && character.class === 'warlock' ? true : false)) Warlock
+              option(value="Wizard" selected=(character && character.class === 'wizard' ? true : false)) Wizard
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="dndRace" class="xl:text-xl text-md text-center md:text-left mb-3") Race 
             select#dndRace(name="dndRace" required)
               option(value="") Select a race
-              option(value="dragonborn" selected=(character && character.race === 'dragonborn' ? true : false)) Dragonborn
-              option(value="dwarf" selected=(character && character.race === 'dwarf' ? true : false)) Dwarf
-              option(value="elf" selected=(character && character.race === 'elf' ? true : false)) Elf
-              option(value="gnome" selected=(character && character.race === 'gnome' ? true : false)) Gnome
-              option(value="half-elf" selected=(character && character.race === 'half-elf' ? true : false)) Half-Elf
-              option(value="halfling" selected=(character && character.race === 'halfling' ? true : false)) Halfling
-              option(value="half-orc" selected=(character && character.race === 'half-orc' ? true : false)) Half-Orc
-              option(value="human" selected=(character && character.race === 'human' ? true : false)) Human
-              option(value="tiefling" selected=(character && character.race === 'tiefling' ? true : false)) Tiefling
+              option(value="Dragonborn" selected=(character && character.race === 'dragonborn' ? true : false)) Dragonborn
+              option(value="Dwarf" selected=(character && character.race === 'dwarf' ? true : false)) Dwarf
+              option(value="Elf" selected=(character && character.race === 'elf' ? true : false)) Elf
+              option(value="Gnome" selected=(character && character.race === 'gnome' ? true : false)) Gnome
+              option(value="Half-Elf" selected=(character && character.race === 'half-elf' ? true : false)) Half-Elf
+              option(value="Halfling" selected=(character && character.race === 'halfling' ? true : false)) Halfling
+              option(value="Half-Orc" selected=(character && character.race === 'half-orc' ? true : false)) Half-Orc
+              option(value="Human" selected=(character && character.race === 'human' ? true : false)) Human
+              option(value="Tiefling" selected=(character && character.race === 'tiefling' ? true : false)) Tiefling
+              option(value="Custom" selected=(character && character.race === 'custom' ? true : false)) Custom
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="dndLevel" class="xl:text-xl text-md text-center md:text-left mb-3") Level 
             input(type="number" required autocomplete="off" id="dndLevel" name="dndLevel" value=(undefined === character ? '' : character.level))

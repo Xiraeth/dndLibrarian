@@ -4,7 +4,7 @@
 
 @layer base {
   @font-face {
-    font-family: montserat;
+    font-family: mont;
     src: url(../fonts/Montserrat.ttf);
   }
 

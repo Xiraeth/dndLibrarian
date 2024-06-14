@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.render("myCharacters", { title: "My Characters" });
-});
+const userController = require("../controllers/userController");
+const characterController = require("../controllers/characterController");
+
+router.get("/", characterController.renderCharacters);
 
 module.exports = router;
