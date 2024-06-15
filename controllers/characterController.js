@@ -6,12 +6,18 @@ const Character = require("../models/character");
 const User = require("../models/user");
 
 exports.renderCharacters = asyncHandler(async (req, res, next) => {
-  const charId = req.params.id;
-  const character = await Character.findById(charId);
+  res.render("myCharacters", { title: "My characters" });
+});
+
+exports.renderCharacter = asyncHandler(async (req, res, next) => {
+  const characterId = req.params.id;
+  const character = await Character.findById(characterId);
 
   console.log(character);
-
-  res.render("myCharacters");
+  res.render("characterPage", {
+    character,
+    title: `My characters - ${character.name}`,
+  });
 });
 
 exports.get_createCharacter = asyncHandler(async (req, res, next) => {

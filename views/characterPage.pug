@@ -1,0 +1,7 @@
+extends layout 
+
+block content 
+  if currentUser
+    h1.text-5xl.text-amber-400.text-center.mt-10= character.name
+  else 
+    p.text-5xl.text-rose-600.text-center.mt-10 You do not have permission to access this page.

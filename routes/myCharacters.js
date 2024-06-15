@@ -6,4 +6,6 @@ const characterController = require("../controllers/characterController");
 
 router.get("/", characterController.renderCharacters);
 
+router.get("/:id", characterController.renderCharacter);
+
 module.exports = router;
