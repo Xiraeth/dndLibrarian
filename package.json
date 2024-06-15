@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "nodemon ./bin/www",
-    "devstart": "set DEBUG=myapp:* & npm start",
+    "dev": "set DEBUG=myapp:* & npm start",
     "tailwind": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch"
   },
   "dependencies": {
