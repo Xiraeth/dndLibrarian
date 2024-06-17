@@ -106,7 +106,25 @@ exports.post_createCharacter = [
         wisdom: req.body.wisdomInput,
         charisma: req.body.charismaInput,
       },
+      proficiencyBonus: 0,
+      inspiration: 0,
+      skillProficiencies: [],
+      savingThrowProficiencies: [],
+      otherProficiencies: [],
+      languages: [],
       spells: [],
+      armorClass: 0,
+      initiative: 0,
+      speed: 0,
+      maxHP: 0,
+      currentHP: 0,
+      temporaryHP: 0,
+      hitDice: 0,
+      equipment: [],
+      personalityTraits: "",
+      ideals: "",
+      bonds: "",
+      flaws: "",
       age: req.body.ageInput,
       height: req.body.heightInput,
       weight: req.body.weightInput,
@@ -123,6 +141,16 @@ exports.post_createCharacter = [
         character,
       });
     } else {
+      character.savingThrows = {
+        strength: character.strengthModifier,
+        dexterity: character.dexterityModifier,
+        constitution: character.constitutionModifier,
+        intelligence: character.intelligenceModifier,
+        wisdom: character.wisdomModifier,
+        charisma: character.charismaModifier,
+      };
+      character.proficiencyBonus = character.CalculateProficiencyBonus;
+
       await character.save();
       user.characters.push(character._id);
       await user.save();

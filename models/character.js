@@ -24,13 +24,13 @@ const CharacterSchema = new Schema({
     wisdom: { type: Number },
     charisma: { type: Number },
   },
+  proficiencyBonus: { type: Number },
   skillProficiencies: [{ type: String }],
   savingThrowProficiencies: [{ type: String }],
   otherProficiencies: [{ type: String }],
   languages: [{ type: String }],
   spells: [{ type: String }],
   inspiration: { type: Number },
-  proficiencyBonus: { type: Number },
   armorClass: { type: Number },
   initiative: { type: Number },
   speed: { type: Number },
@@ -155,6 +155,14 @@ CharacterSchema.virtual("stealth").get(function () {
 
 CharacterSchema.virtual("survival").get(function () {
   return Math.floor((this.abilityScores.wisdom - 10) / 2);
+});
+
+CharacterSchema.virtual("CalculateProficiencyBonus").get(function () {
+  if (this.level >= 17) return 6;
+  if (this.level >= 13) return 5;
+  if (this.level >= 9) return 4;
+  if (this.level >= 5) return 3;
+  return 2;
 });
 
 CharacterSchema.set("toJSON", { virtuals: true });
