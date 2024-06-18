@@ -152,6 +152,7 @@ exports.post_createCharacter = [
 
       await character.save();
       user.characters.push(character._id);
+
       await user.save();
       res.redirect("/");
     }

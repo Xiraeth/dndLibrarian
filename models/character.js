@@ -85,76 +85,38 @@ CharacterSchema.virtual("charismaModifier").get(function () {
 });
 
 // Virtuals for skills
-CharacterSchema.virtual("acrobatics").get(function () {
-  return Math.floor((this.abilityScores.dexterity - 10) / 2);
-});
+const skills = [
+  { name: "acrobatics", ability: "dexterity" },
+  { name: "animalHandling", ability: "wisdom" },
+  { name: "arcana", ability: "intelligence" },
+  { name: "athletics", ability: "strength" },
+  { name: "deception", ability: "charisma" },
+  { name: "history", ability: "intelligence" },
+  { name: "insight", ability: "wisdom" },
+  { name: "intimidation", ability: "charisma" },
+  { name: "investigation", ability: "intelligence" },
+  { name: "medicine", ability: "wisdom" },
+  { name: "nature", ability: "intelligence" },
+  { name: "perception", ability: "wisdom" },
+  { name: "performance", ability: "charisma" },
+  { name: "persuasion", ability: "charisma" },
+  { name: "religion", ability: "intelligence" },
+  { name: "sleightOfHand", ability: "dexterity" },
+  { name: "stealth", ability: "dexterity" },
+  { name: "survival", ability: "wisdom" },
+];
 
-CharacterSchema.virtual("animalHandling").get(function () {
-  return Math.floor((this.abilityScores.wisdom - 10) / 2);
-});
-
-CharacterSchema.virtual("arcana").get(function () {
-  return Math.floor((this.abilityScores.intelligence - 10) / 2);
-});
-
-CharacterSchema.virtual("athletics").get(function () {
-  return Math.floor((this.abilityScores.strength - 10) / 2);
-});
-
-CharacterSchema.virtual("deception").get(function () {
-  return Math.floor((this.abilityScores.charisma - 10) / 2);
-});
-
-CharacterSchema.virtual("history").get(function () {
-  return Math.floor((this.abilityScores.intelligence - 10) / 2);
-});
-
-CharacterSchema.virtual("insight").get(function () {
-  return Math.floor((this.abilityScores.wisdom - 10) / 2);
-});
-
-CharacterSchema.virtual("intimidation").get(function () {
-  return Math.floor((this.abilityScores.charisma - 10) / 2);
-});
-
-CharacterSchema.virtual("investigation").get(function () {
-  return Math.floor((this.abilityScores.intelligence - 10) / 2);
-});
-
-CharacterSchema.virtual("medicine").get(function () {
-  return Math.floor((this.abilityScores.wisdom - 10) / 2);
-});
-
-CharacterSchema.virtual("nature").get(function () {
-  return Math.floor((this.abilityScores.intelligence - 10) / 2);
-});
-
-CharacterSchema.virtual("perception").get(function () {
-  return Math.floor((this.abilityScores.wisdom - 10) / 2);
-});
-
-CharacterSchema.virtual("performance").get(function () {
-  return Math.floor((this.abilityScores.charisma - 10) / 2);
-});
-
-CharacterSchema.virtual("persuasion").get(function () {
-  return Math.floor((this.abilityScores.charisma - 10) / 2);
-});
-
-CharacterSchema.virtual("religion").get(function () {
-  return Math.floor((this.abilityScores.intelligence - 10) / 2);
-});
-
-CharacterSchema.virtual("sleightOfHand").get(function () {
-  return Math.floor((this.abilityScores.dexterity - 10) / 2);
-});
-
-CharacterSchema.virtual("stealth").get(function () {
-  return Math.floor((this.abilityScores.dexterity - 10) / 2);
-});
-
-CharacterSchema.virtual("survival").get(function () {
-  return Math.floor((this.abilityScores.wisdom - 10) / 2);
+// CharacterSchema.virtual('acrobatics').get(function() {});
+// character.acrobatics;
+skills.forEach((skill) => {
+  CharacterSchema.virtual(skill.name).get(function () {
+    const abilityModifier = Math.floor(
+      (this.abilityScores[skill.ability] - 10) / 2
+    );
+    if (this.skillProficiencies.includes(skill.name))
+      return abilityModifier + this.proficiencyBonus;
+    else return abilityModifier;
+  });
 });
 
 CharacterSchema.virtual("CalculateProficiencyBonus").get(function () {

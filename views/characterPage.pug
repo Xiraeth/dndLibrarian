@@ -9,14 +9,14 @@ block content
           h1.mr-auto(class="lg:text-3xl text-xl") Level #{character.level} #{character.race} #{character.class}
           h1(class="lg:text-3xl text-xl") #{character.background}, #{character.alignment}
       div.second-row.flex.justify-between(class="lg:flex-row flex-col")
-        div.flex.flex-col.gap-5.text-lg(class="lg:mb-0 mb-10 lg:border-b-0 border-b-2 border-b-white/50 pb-5 justify-center")
-          div.flex.gap-5.items-center(class="lg:justify-start justify-between")
+        div.flex.flex-col.gap-5.text-lg(class="lg:mb-0 mb-7 lg:border-b-0 border-b-2 border-b-white/50 pb-7 justify-center")
+          div.flex.gap-5.items-center(class="justify-between")
             p.text-cyan-300.text-2xl Inspiration:
             span(class="bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") #{character.inspiration} 
           div.flex.gap-5.items-center(class="lg:justify-start justify-between")
             p.text-cyan-300.text-2xl Proficiency Bonus:
             span(class="bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") #{character.proficiencyBonus} 
-        div.flex.gap-10.text-lg(class="lg:flex-row flex-col lg:mb-0 mb-10 lg:border-b-0 border-b-2 border-b-white/50 pb-5 lg:items-center")
+        div.flex.gap-10.text-lg(class="lg:flex-row flex-col lg:mb-0 lg:border-b-0 border-b-2 border-b-white/50 pb-7 lg:items-center")
           div.text-center.flex.gap-3(class="lg:flex-col flex-row items-center lg:justify-start justify-between")
             p.text-2xl.text-cyan-300 Armor Class 
             p(class=`bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm`)= character.armorClass
@@ -34,30 +34,49 @@ block content
           p.text-2xl.text-cyan-300.flex.gap-20.items-center.justify-between Hit Dice: 
             span(class="bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm text-white text-lg")= character.hitDice
       div.third-row.flex.text-white(class="flex-row justify-center lg:justify-around lg:gap-0 gap-y-10 gap-x-20 flex-wrap mt-10")
-        div
-          h1.text-cyan-300(class="text-2xl lg:text-3xl") Strength
-          p.flex.justify-between(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") #{character.abilityScores.strength} 
-            span (#{character.strengthModifier})
-        div
-          h1.text-cyan-300(class="text-2xl lg:text-3xl") Dexterity
-          p.flex.justify-between(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") #{character.abilityScores.dexterity} 
-            span (#{character.dexterityModifier})
-        div
-          h1.text-cyan-300(class="text-2xl lg:text-3xl") Constitution
-          p.flex.justify-between(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") #{character.abilityScores.constitution} 
-            span (#{character.constitutionModifier})
-        div
-          h1.text-cyan-300(class="text-2xl lg:text-3xl") Intelligence
-          p.flex.justify-between(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") #{character.abilityScores.intelligence} 
-            span (#{character.intelligenceModifier})
-        div
-          h1.text-cyan-300(class="text-2xl lg:text-3xl") Wisdom
-          p.flex.justify-between(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") #{character.abilityScores.wisdom} 
-            span (#{character.wisdomModifier})
-        div
-          h1.text-cyan-300(class="text-2xl lg:text-3xl") Charisma
-          p.flex.justify-between(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") #{character.abilityScores.charisma} 
-            span (#{character.charismaModifier})
+        div(class="min-w-36")
+          h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Strength
+          div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
+            div.flex.justify-between.w-full.items-center
+              span(class="text-2xl lg:text-3xl") #{character.abilityScores.strength}  
+              span(class=`${character.strengthModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{character.strengthModifier})
+            p(class=`${character.strengthModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{character.savingThrows.strength}]
+        div(class="min-w-36")
+          h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Dexterity
+          div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
+            div.flex.justify-between.w-full.items-center
+              span(class="text-2xl lg:text-3xl") #{character.abilityScores.dexterity}  
+              span(class=`${character.dexterityModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{character.dexterityModifier})
+            p(class=`${character.dexterityModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{character.savingThrows.dexterity}]
+        div(class="min-w-36")
+          h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Constitution
+          div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
+            div.flex.justify-between.w-full.items-center
+              span(class="text-2xl lg:text-3xl") #{character.abilityScores.constitution}  
+              span(class=`${character.constitutionModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{character.constitutionModifier})
+            p(class=`${character.constitutionModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{character.savingThrows.constitution}]
+        div(class="min-w-36")
+          h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Intelligence 
+          div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
+            div.flex.justify-between.w-full.items-center
+              span(class="text-2xl lg:text-3xl") #{character.abilityScores.intelligence}  
+              span(class=`${character.intelligenceModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{character.intelligenceModifier})
+            p(class=`${character.intelligenceModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{character.savingThrows.intelligence}]
+        div(class="min-w-36")
+          h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Wisdom 
+          div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
+            div.flex.justify-between.w-full.items-center
+              span(class="text-2xl lg:text-3xl") #{character.abilityScores.wisdom}  
+              span(class=`${character.wisdomModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{character.wisdomModifier})
+            p(class=`${character.wisdomModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{character.savingThrows.wisdom}]
+        div(class="min-w-36")
+          h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Charisma
+          div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
+            div.flex.justify-between.w-full.items-center
+              span(class="text-2xl lg:text-3xl") #{character.abilityScores.charisma}  
+              span(class=`${character.charismaModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{character.charismaModifier})
+            p(class=`${character.charismaModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{character.savingThrows.charisma}]
+      div.fourth-row
 
   else 
     p.text-5xl.text-rose-600.text-center.mt-10 You do not have permission to access this page.
