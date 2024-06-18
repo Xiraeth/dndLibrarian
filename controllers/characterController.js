@@ -13,7 +13,6 @@ exports.renderCharacter = asyncHandler(async (req, res, next) => {
   const characterId = req.params.id;
   const character = await Character.findById(characterId);
 
-  console.log(character);
   res.render("characterPage", {
     character,
     title: `My characters - ${character.name}`,

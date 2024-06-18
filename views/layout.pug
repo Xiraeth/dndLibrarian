@@ -5,15 +5,15 @@ html
     link(rel='stylesheet', href='/stylesheets/output.css')
     script(src="/javascripts/tabControl.js" defer)
     script(src="https://kit.fontawesome.com/00de2a7224.js" crossorigin="anonymous")
-  body(class="text-white bg-[url('/images/bg.jpg')] bg-no-repeat bg-center bg-fixed min-h-screen")
+  body(class="text-white bg-[url('/images/bg.jpg')] bg-no-repeat bg-fixed sm:bg-center")
     div(class="header py-8 px-10 flex justify-between items-center")
-      a(href="/" class="xl:text-3xl text-xl font-cactus text-amber-300 hover:text-amber-400 transition-colors duration-150") Home
+      a(href="/" class="lg:text-3xl text-xl font-cactus text-amber-300 hover:text-amber-400 transition-colors duration-150") Home
       if currentUser 
-        div#connectButtons(class="text-lg xl:text-2xl flex gap-10")
+        div#connectButtons(class="text-lg lg:text-2xl flex gap-10")
           //- a(href="/myCharacters" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Characters
           a(href="/logout" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Logout
       else
-        div#connectButtons(class="text-lg xl:text-2xl flex gap-10")
+        div#connectButtons(class="text-lg lg:text-2xl flex gap-10")
           a(href="/login" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Log in
           a(href="/signup" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Sign up
     block content
