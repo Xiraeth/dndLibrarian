@@ -29,26 +29,32 @@ const CharacterSchema = new Schema({
   savingThrowProficiencies: [{ type: String }],
   otherProficiencies: [{ type: String }],
   languages: [{ type: String }],
-  spells: [{ type: String }],
   inspiration: { type: Number },
-  armorClass: { type: Number },
-  initiative: { type: Number },
-  speed: { type: Number },
-  maxHP: { type: Number },
-  currentHP: { type: Number },
-  temporaryHP: { type: Number },
-  hitDice: { type: Number },
-  equipment: [{ type: String }],
-  personalityTraits: { type: String },
-  ideals: { type: String },
-  bonds: { type: String },
-  flaws: { type: String },
-  age: { type: Number, required: false },
-  height: { type: Number, required: false },
-  weight: { type: Number, required: false },
-  eyes: { type: String, required: false },
-  skin: { type: String, required: false },
-  hair: { type: String, required: false },
+  combatStats: {
+    spells: [{ type: String }],
+    armorClass: { type: Number, required: true },
+    initiative: { type: Number, required: true },
+    speed: { type: Number, required: true },
+    maxHP: { type: Number, required: true },
+    currentHP: { type: Number },
+    temporaryHP: { type: Number },
+    hitDice: { type: Number },
+    equipment: [{ type: String }],
+  },
+  personality: {
+    personalityTraits: { type: String },
+    ideals: { type: String },
+    bonds: { type: String },
+    flaws: { type: String },
+  },
+  appearance: {
+    age: { type: Number, required: false },
+    height: { type: Number, required: false },
+    weight: { type: Number, required: false },
+    eyes: { type: String, required: false },
+    skin: { type: String, required: false },
+    hair: { type: String, required: false },
+  },
   user: { type: Schema.Types.ObjectId, ref: "User" },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
@@ -120,11 +126,12 @@ skills.forEach((skill) => {
 });
 
 CharacterSchema.virtual("CalculateProficiencyBonus").get(function () {
-  if (this.level >= 17) return 6;
-  if (this.level >= 13) return 5;
-  if (this.level >= 9) return 4;
-  if (this.level >= 5) return 3;
-  return 2;
+  // if (this.level >= 17) return 6;
+  // if (this.level >= 13) return 5;
+  // if (this.level >= 9) return 4;
+  // if (this.level >= 5) return 3;
+  // return 2;
+  return 2 + Math.floor((this.level - 1) / 4);
 });
 
 CharacterSchema.set("toJSON", { virtuals: true });

@@ -27,7 +27,7 @@ exports.post_createCharacter = [
   body("dndName")
     .trim()
     .custom((value) => {
-      if (value.length === 0) throw new Error("Name cannot be empty.");
+      if (value === "") throw new Error("Name cannot be empty.");
       else if (value.length > 32)
         throw new Error("Name cannot be more than 32 characters long.");
       return true;
@@ -85,6 +85,38 @@ exports.post_createCharacter = [
       return true;
     })
     .escape(),
+  body("armorClassInput")
+    .trim()
+    .custom((value) => {
+      if (value === "" || value < 0)
+        throw new Error("'Armor class' must be a positive integer.");
+      return true;
+    })
+    .escape(),
+  body("speedInput")
+    .trim()
+    .custom((value) => {
+      if (value === "" || value < 0)
+        throw new Error("'Speed' must be a positive integer.");
+      return true;
+    })
+    .escape(),
+  body("initiativeInput")
+    .trim()
+    .custom((value) => {
+      if (value === "" || value < 0)
+        throw new Error("'Initiative' must be a positive integer.");
+      return true;
+    })
+    .escape(),
+  body("hpInput")
+    .trim()
+    .custom((value) => {
+      if (value === "" || value < 0)
+        throw new Error("'Hitpoints' must be a positive integer.");
+      return true;
+    })
+    .escape(),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
@@ -105,31 +137,45 @@ exports.post_createCharacter = [
         wisdom: req.body.wisdomInput,
         charisma: req.body.charismaInput,
       },
+      savingThrows: {
+        strength: 0,
+        dexterity: 0,
+        constitution: 0,
+        intelligence: 0,
+        wisdom: 0,
+        charisma: 0,
+      },
       proficiencyBonus: 0,
       inspiration: 0,
       skillProficiencies: [],
       savingThrowProficiencies: [],
       otherProficiencies: [],
       languages: [],
-      spells: [],
-      armorClass: 0,
-      initiative: 0,
-      speed: 0,
-      maxHP: 0,
-      currentHP: 0,
-      temporaryHP: 0,
-      hitDice: 0,
-      equipment: [],
-      personalityTraits: "",
-      ideals: "",
-      bonds: "",
-      flaws: "",
-      age: req.body.ageInput,
-      height: req.body.heightInput,
-      weight: req.body.weightInput,
-      eyes: req.body.eyesInput,
-      skin: req.body.skinInput,
-      hair: req.body.hairInput,
+      combatStats: {
+        spells: [],
+        armorClass: req.body.armorClassInput,
+        initiative: req.body.initiativeInput,
+        speed: req.body.speedInput,
+        maxHP: req.body.hpInput,
+        currentHP: req.body.hpInput,
+        temporaryHP: req.body.hpInput,
+        hitDice: req.body.hpInput,
+        equipment: [],
+      },
+      personality: {
+        personalityTraits: req.body.personalityTraitsInput,
+        ideals: req.body.idealsInput,
+        bonds: req.body.bondsInput,
+        flaws: req.body.flawsInput,
+      },
+      appearance: {
+        age: req.body.ageInput,
+        height: req.body.heightInput,
+        weight: req.body.weightInput,
+        eyes: req.body.eyesInput,
+        skin: req.body.skinInput,
+        hair: req.body.hairInput,
+      },
       user,
     });
 

@@ -7,7 +7,9 @@ block content
       #tabsContainer.flex.justify-between.text-black.cursor-pointer.rounded-t-lg(class="xl:text-xl md:text-lg text-base")
         button#detailsButton.mx-auto.rounded-t-xl.activeTab.border-r-2.border-black(type="button" class="w-1/3 transition-colors duration-300" data-name="detailsTab") Details 
         button#abilitiesButton.mx-auto.rounded-t-xl.border-r-2.border-black(type="button" class="w-1/3 transition-colors duration-300" data-name="abilitiesTab") Abilities 
-        button#appearanceButton.mx-auto.rounded-t-xl(type="button" class="w-1/3 transition-colors duration-300" data-name="appearanceTab") Appearance
+        button#appearanceButton.mx-auto.rounded-t-xl.border-r-2.border-black(type="button" class="w-1/3 transition-colors duration-300" data-name="combatStatsTab") Combat
+        button#appearanceButton.mx-auto.rounded-t-xl.border-r-2.border-black(type="button" class="w-1/3 transition-colors duration-300" data-name="appearanceTab") Appearance
+        button#appearanceButton.mx-auto.rounded-t-xl(type="button" class="w-1/3 transition-colors duration-300" data-name="personalityTab") Personality
 
       .tabsContent
         .tabDetails.tab.px-10#detailsTab
@@ -18,32 +20,32 @@ block content
             label(for="dndClass" class="xl:text-xl text-md text-center md:text-left mb-3") Class
             select#dndClass(name="dndClass" required value=(undefined === character ? '' : character.dndClass))
               option(value="") Select a class
-              option(value="Barbarian" selected=(character && character.class === 'barbarian' ? true : false)) Barbarian
-              option(value="Bard" selected=(character && character.class === 'bard' ? true : false)) Bard
-              option(value="Cleric" selected=(character && character.class === 'cleric' ? true : false)) Cleric
-              option(value="Druid" selected=(character && character.class === 'druid' ? true : false)) Druid
-              option(value="Fighter" selected=(character && character.class === 'fighter' ? true : false)) Fighter
-              option(value="Monk" selected=(character && character.class === 'monk' ? true : false)) Monk
-              option(value="Paladin" selected=(character && character.class === 'paladin' ? true : false)) Paladin
-              option(value="Ranger" selected=(character && character.class === 'ranger' ? true : false)) Ranger
-              option(value="Rogue" selected=(character && character.class === 'rogue' ? true : false)) Rogue
-              option(value="Sorcerer" selected=(character && character.class === 'sorcerer' ? true : false)) Sorcerer
-              option(value="Warlock" selected=(character && character.class === 'warlock' ? true : false)) Warlock
-              option(value="Wizard" selected=(character && character.class === 'wizard' ? true : false)) Wizard
+              option(value="Barbarian" selected=(character && character.class === 'Barbarian' ? true : false)) Barbarian
+              option(value="Bard" selected=(character && character.class === 'Bard' ? true : false)) Bard
+              option(value="Cleric" selected=(character && character.class === 'Cleric' ? true : false)) Cleric
+              option(value="Druid" selected=(character && character.class === 'Druid' ? true : false)) Druid
+              option(value="Fighter" selected=(character && character.class === 'Fighter' ? true : false)) Fighter
+              option(value="Monk" selected=(character && character.class === 'Monk' ? true : false)) Monk
+              option(value="Paladin" selected=(character && character.class === 'Paladin' ? true : false)) Paladin
+              option(value="Ranger" selected=(character && character.class === 'Ranger' ? true : false)) Ranger
+              option(value="Rogue" selected=(character && character.class === 'Rogue' ? true : false)) Rogue
+              option(value="Sorcerer" selected=(character && character.class === 'Sorcerer' ? true : false)) Sorcerer
+              option(value="Warlock" selected=(character && character.class === 'Warlock' ? true : false)) Warlock
+              option(value="Wizard" selected=(character && character.class === 'Wizard' ? true : false)) Wizard
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="dndRace" class="xl:text-xl text-md text-center md:text-left mb-3") Race 
             select#dndRace(name="dndRace" required)
               option(value="") Select a race
-              option(value="Dragonborn" selected=(character && character.race === 'dragonborn' ? true : false)) Dragonborn
-              option(value="Dwarf" selected=(character && character.race === 'dwarf' ? true : false)) Dwarf
-              option(value="Elf" selected=(character && character.race === 'elf' ? true : false)) Elf
-              option(value="Gnome" selected=(character && character.race === 'gnome' ? true : false)) Gnome
-              option(value="Half-Elf" selected=(character && character.race === 'half-elf' ? true : false)) Half-Elf
-              option(value="Halfling" selected=(character && character.race === 'halfling' ? true : false)) Halfling
-              option(value="Half-Orc" selected=(character && character.race === 'half-orc' ? true : false)) Half-Orc
-              option(value="Human" selected=(character && character.race === 'human' ? true : false)) Human
-              option(value="Tiefling" selected=(character && character.race === 'tiefling' ? true : false)) Tiefling
-              option(value="Custom" selected=(character && character.race === 'custom' ? true : false)) Custom
+              option(value="Dragonborn" selected=(character && character.race === 'Dragonborn' ? true : false)) Dragonborn
+              option(value="Dwarf" selected=(character && character.race === 'Dwarf' ? true : false)) Dwarf
+              option(value="Elf" selected=(character && character.race === 'Elf' ? true : false)) Elf
+              option(value="Gnome" selected=(character && character.race === 'Gnome' ? true : false)) Gnome
+              option(value="Half-Elf" selected=(character && character.race === 'Half-Elf' ? true : false)) Half-Elf
+              option(value="Halfling" selected=(character && character.race === 'Halfling' ? true : false)) Halfling
+              option(value="Half-Orc" selected=(character && character.race === 'Half-Orc' ? true : false)) Half-Orc
+              option(value="Human" selected=(character && character.race === 'Human' ? true : false)) Human
+              option(value="Tiefling" selected=(character && character.race === 'Tiefling' ? true : false)) Tiefling
+              option(value="Custom" selected=(character && character.race === 'Custom' ? true : false)) Custom
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="dndLevel" class="xl:text-xl text-md text-center md:text-left mb-3") Level 
             input(type="number" required autocomplete="off" id="dndLevel" name="dndLevel" value=(undefined === character ? '' : character.level))
@@ -82,27 +84,54 @@ block content
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="charismaInput" class="xl:text-xl text-md text-center md:text-left mb-3") Charisma 
             input(type="number" required autocomplete="off" id="charismaInput" name="charismaInput" value=(undefined === character ? '' : character.abilityScores.charisma))
+        .tabCombatStats.tab.px-10#combatStatsTab.hidden
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="armorClassInput" class="xl:text-xl text-md text-center md:text-left mb-3") Armor Class
+            input(type="number" required autocomplete="off" id="armorClassInput" name="armorClassInput" value=(undefined === character ? '' : character.combatStats.armorClass))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="speedInput" class="xl:text-xl text-md text-center md:text-left mb-3") Speed
+            input(type="number" required autocomplete="off" id="speedInput" name="speedInput" value=(undefined === character ? '' : character.combatStats.speed))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="initiativeInput" class="xl:text-xl text-md text-center md:text-left mb-3") Initiative
+            input(type="number" required autocomplete="off" id="initiativeInput" name="initiativeInput" value=(undefined === character ? '' : character.combatStats.initiative))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="hpInput" class="xl:text-xl text-md text-center md:text-left mb-3") HP
+            input(type="number" required autocomplete="off" id="hpInput" name="hpInput" value=(undefined === character ? '' : character.combatStats.maxHP))
         .tabAppearance.tab.px-10#appearanceTab.hidden
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="ageInput" class="xl:text-xl text-md text-center md:text-left mb-3") Age 
-            input(type="number" autocomplete="off" id="ageInput" name="ageInput" value=(undefined === character ? '' : character.age))
+            input(type="number" autocomplete="off" id="ageInput" name="ageInput" value=(undefined === character ? '' : character.appearance.age))
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="heightInput" class="xl:text-xl text-md text-center md:text-left mb-3") Height
-            input(type="text" autocomplete="off" id="heightInput" name="heightInput" value=(undefined === character ? '' : character.height))
+            input(type="text" autocomplete="off" id="heightInput" name="heightInput" value=(undefined === character ? '' : character.appearance.height))
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="weightInput" class="xl:text-xl text-md text-center md:text-left mb-3") Weight
-            input(type="text" autocomplete="off" id="weightInput" name="weightInput" value=(undefined === character ? '' : character.weight))
+            input(type="text" autocomplete="off" id="weightInput" name="weightInput" value=(undefined === character ? '' : character.appearance.weight))
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="eyesInput" class="xl:text-xl text-md text-center md:text-left mb-3") Eyes
-            input(type="text" autocomplete="off" id="eyesInput" name="eyesInput" value=(undefined === character ? '' : character.eyes))
+            input(type="text" autocomplete="off" id="eyesInput" name="eyesInput" value=(undefined === character ? '' : character.appearance.eyes))
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="skinInput" class="xl:text-xl text-md text-center md:text-left mb-3") Skin
-            input(type="text" autocomplete="off" id="skinInput" name="skinInput" value=(undefined === character ? '' : character.skin))
+            input(type="text" autocomplete="off" id="skinInput" name="skinInput" value=(undefined === character ? '' : character.appearance.skin))
           .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
             label(for="hairInput" class="xl:text-xl text-md text-center md:text-left mb-3") Hair
-            input(type="text" autocomplete="off" id="hairInput" name="hairInput" value=(undefined === character ? '' : character.hair))
+            input(type="text" autocomplete="off" id="hairInput" name="hairInput" value=(undefined === character ? '' : character.appearance.hair))
+        .tabPersonality.tab.px-10#personalityTab.hidden
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="personalityTraitsInput" class="xl:text-xl text-md text-center md:text-left mb-3") Personality Traits
+            textarea(autocomplete="off" id="personalityTraitsInput" name="personalityTraitsInput" value=(undefined === character ? '' : character.personality.personalityTraits))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="idealsInput" class="xl:text-xl text-md text-center md:text-left mb-3") Ideals
+            textarea(autocomplete="off" id="idealsInput" name="idealsInput" value=(undefined === character ? '' : character.personality.ideals))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="bondsInput" class="xl:text-xl text-md text-center md:text-left mb-3") Bonds
+            textarea(autocomplete="off" id="bondsInput" name="bondsInput" value=(undefined === character ? '' : character.personality.bonds))
+          .input-group.flex.flex-col.justify-center.items-center.py-5(class="md:flex-row")
+            label(for="flawsInput" class="xl:text-xl text-md text-center md:text-left mb-3") Flaws
+            textarea(autocomplete="off" id="flawsInput" name="flawsInput" value=(undefined === character ? '' : character.personality.flaws))
+
         if errors
-          ul.mt-3
+          ul.mt-3#errorList
             for error in errors 
               li.my-3.py-2(class="text-center bg-rose-600/80 sm:text-xl text-base")= error.msg
       button(type="submit" id="createCharButton" class="submitBtn bg-amber-400 hover:bg-amber-300 transition-all duration-150 text-black py-2 w-48 xl:text-xl text-md mx-auto rounded-md") Create character
