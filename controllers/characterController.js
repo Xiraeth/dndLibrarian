@@ -5,9 +5,9 @@ const { body, validationResult } = require("express-validator");
 const Character = require("../models/character");
 const User = require("../models/user");
 
-exports.renderCharacters = asyncHandler(async (req, res, next) => {
-  res.render("myCharacters", { title: "My characters" });
-});
+// exports.renderCharacters = asyncHandler(async (req, res, next) => {
+//   res.render("myCharacters", { title: "My characters" });
+// });
 
 exports.renderCharacter = asyncHandler(async (req, res, next) => {
   const characterId = req.params.id;
@@ -204,3 +204,10 @@ exports.post_createCharacter = [
     }
   }),
 ];
+
+exports.post_deleteCharacter = asyncHandler(async (req, res) => {
+  const characterId = req.params.id;
+  const character = await Character.findByIdAndDelete(characterId);
+
+  res.redirect("/");
+});

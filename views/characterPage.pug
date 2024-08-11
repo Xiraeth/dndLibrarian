@@ -78,5 +78,21 @@ block content
             p(class=`${character.charismaModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.charisma > 0 ? "+" + character.savingThrows.charisma : character.savingThrows.charisma}`}]
       div.fourth-row
 
+      div#deleteCharModal
+        div Are you sure you want to delete the character?
+        div#modalSubmitButtons
+          // Form for deleting the character
+          form(action=`/deleteCharacter/${character._id}` method="POST")
+            button#confirmDeleteButton(type="submit" class="bg-red-500 py-2 px-4 text-white rounded hover:bg-red-700 transition-colors duration-150") 
+              | Yes, Delete
+          // Button to cancel deletion
+          button#cancelDeleteButton(class="bg-gray-500 text-white rounded py-2 px-4 hover:bg-gray-700 transition-colors duration-150") Cancel
+            //- a(href=`/myCharacters/${character._id}` class="block w-full h-full py-2 px-4") Cancel
+
+
+
+
+
+
   else 
     p.text-5xl.text-rose-600.text-center.mt-10 You do not have permission to access this page.
