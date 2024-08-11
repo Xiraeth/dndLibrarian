@@ -780,10 +780,6 @@ video {
   height: 5rem;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .min-h-40 {
   min-height: 10rem;
 }
@@ -826,10 +822,6 @@ video {
 
 .min-w-32 {
   min-width: 8rem;
-}
-
-.min-w-36 {
-  min-width: 9rem;
 }
 
 .cursor-pointer {
@@ -890,6 +882,11 @@ video {
 .gap-x-20 {
   -moz-column-gap: 5rem;
        column-gap: 5rem;
+}
+
+.gap-x-6 {
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem;
 }
 
 .gap-y-10 {
