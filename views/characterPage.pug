@@ -40,42 +40,42 @@ block content
             div.flex.justify-center.w-full.items-center.gap-x-6
               span(class="text-2xl lg:text-3xl") #{character.abilityScores.strength}  
               span(class=`${character.strengthModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.strengthModifier > 0 ? "+" + character.strengthModifier : character.strengthModifier}`})
-            p(class=`${character.strengthModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.strength > 0 ? "+" + character.savingThrows.strength : character.savingThrows.strength}`}]
+            p(class=`${character.savingThrows.strength >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.strength > 0 ? "+" + character.savingThrows.strength : character.savingThrows.strength}`}]
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Dexterity
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
             div.flex.justify-center.w-full.items-center.gap-x-6
               span(class="text-2xl lg:text-3xl") #{character.abilityScores.dexterity}  
               span(class=`${character.dexterityModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.dexterityModifier > 0 ? "+" + character.dexterityModifier : character.dexterityModifier}`})
-            p(class=`${character.dexterityModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.dexterity > 0 ? "+" + character.savingThrows.dexterity : character.savingThrows.dexterity}`}]
+            p(class=`${character.savingThrows.dexterity >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.dexterity > 0 ? "+" + character.savingThrows.dexterity : character.savingThrows.dexterity}`}]
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Constitution
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
             div.flex.justify-center.w-full.items-center.gap-x-6
               span(class="text-2xl lg:text-3xl") #{character.abilityScores.constitution}  
               span(class=`${character.constitutionModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.constitutionModifier > 0 ? "+" + character.constitutionModifier : character.constitutionModifier}`})
-            p(class=`${character.constitutionModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.constitution > 0 ? "+" + character.savingThrows.constitution : character.savingThrows.constitution}`}]
+            p(class=`${character.savingThrows.constitution >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.constitution > 0 ? "+" + character.savingThrows.constitution : character.savingThrows.constitution}`}]
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Intelligence 
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
             div.flex.justify-center.w-full.items-center.gap-x-6
               span(class="text-2xl lg:text-3xl") #{character.abilityScores.intelligence}  
               span(class=`${character.intelligenceModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.intelligenceModifier > 0 ? "+" + character.intelligenceModifier : character.intelligenceModifier}`})
-            p(class=`${character.intelligenceModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.intelligence > 0 ? "+" + character.savingThrows.intelligence : character.savingThrows.intelligence}`}]
+            p(class=`${character.savingThrows.intelligence >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.intelligence > 0 ? "+" + character.savingThrows.intelligence : character.savingThrows.intelligence}`}]
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Wisdom 
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
             div.flex.justify-center.w-full.items-center.gap-x-6
               span(class="text-2xl lg:text-3xl") #{character.abilityScores.wisdom}  
               span(class=`${character.wisdomModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.wisdomModifier > 0 ? "+" + character.wisdomModifier : character.wisdomModifier}`})
-            p(class=`${character.wisdomModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.wisdom > 0 ? "+" + character.savingThrows.wisdom : character.savingThrows.wisdom}`}]
+            p(class=`${character.savingThrows.wisdom >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.wisdom > 0 ? "+" + character.savingThrows.wisdom : character.savingThrows.wisdom}`}]
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Charisma
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
             div.flex.justify-center.w-full.items-center.gap-x-6
               span(class="text-2xl lg:text-3xl") #{character.abilityScores.charisma}  
               span(class=`${character.charismaModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.charismaModifier > 0 ? "+" + character.charismaModifier : character.charismaModifier}`})
-            p(class=`${character.charismaModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.charisma > 0 ? "+" + character.savingThrows.charisma : character.savingThrows.charisma}`}]
+            p(class=`${character.savingThrows.charisma >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.charisma > 0 ? "+" + character.savingThrows.charisma : character.savingThrows.charisma}`}]
       div.fourth-row
 
       div#deleteCharModal

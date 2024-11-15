@@ -26,9 +26,19 @@ const ABILITIES = [
 exports.renderCharacter = asyncHandler(async (req, res, next) => {
   const characterId = req.params.id;
   const character = await Character.findById(characterId);
+  const user = req.user;
+
+  if (!user) {
+    res.redirect("/");
+  }
+
+  const allUserCharacters = await Character?.find({
+    _id: { $in: user.characters },
+  });
 
   res.render("characterPage", {
     character,
+    allUserCharacters,
     title: `My characters - ${character.name}`,
   });
 });
@@ -238,6 +248,15 @@ exports.post_createCharacter = [
 exports.post_deleteCharacter = asyncHandler(async (req, res) => {
   const characterId = req.params.id;
   const character = await Character.findByIdAndDelete(characterId);
+
+  if (!character) {
+    return res.status(404).send("Character not found");
+  }
+
+  await User.updateOne(
+    { characters: characterId },
+    { $pull: { characters: characterId } }
+  );
 
   res.redirect("/");
 });

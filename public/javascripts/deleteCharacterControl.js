@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const isPageDeleteCharacter = pathArray?.includes("myCharacters");
 
-  // if (specificParam) {
   if (isPageDeleteCharacter) {
     showModalButton.addEventListener(
       "click",
@@ -21,6 +20,5 @@ document.addEventListener("DOMContentLoaded", function () {
       "click",
       (e) => (modal.style.display = "none")
     );
-    // }
   }
 });
