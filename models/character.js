@@ -1,12 +1,16 @@
+const {
+  calculateProficiencyBonus,
+} = require("../public/javascripts/functions.js");
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CharacterSchema = new Schema({
-  name: { type: String, required: true, minglength: 1 },
+  name: { type: String, required: true, minlength: 1 },
   class: { type: String, required: true },
   race: { type: String, required: true },
-  level: { type: Number, required: true },
-  background: { type: String, required: false },
+  level: { type: Number, required: true, max: 20 },
+  background: { type: String, required: false, default: "" },
   alignment: { type: String, required: true },
   abilityScores: {
     strength: { type: Number, required: true, min: 0 },
@@ -17,15 +21,15 @@ const CharacterSchema = new Schema({
     charisma: { type: Number, required: true, min: 0 },
   },
   savingThrows: {
-    strength: { type: Number },
-    dexterity: { type: Number },
-    constitution: { type: Number },
-    intelligence: { type: Number },
-    wisdom: { type: Number },
-    charisma: { type: Number },
+    strength: { type: Number, default: 0 },
+    dexterity: { type: Number, default: 0 },
+    constitution: { type: Number, default: 0 },
+    intelligence: { type: Number, default: 0 },
+    wisdom: { type: Number, default: 0 },
+    charisma: { type: Number, default: 0 },
   },
   proficiencyBonus: { type: Number },
-  skillProficiencies: [{ type: String }],
+  skillProficiencies: { type: [String], default: [] },
   savingThrowProficiencies: [{ type: String }],
   otherProficiencies: [{ type: String }],
   languages: [{ type: String }],
@@ -112,8 +116,6 @@ const skills = [
   { name: "survival", ability: "wisdom" },
 ];
 
-// CharacterSchema.virtual('acrobatics').get(function() {});
-// character.acrobatics;
 skills.forEach((skill) => {
   CharacterSchema.virtual(skill.name).get(function () {
     const abilityModifier = Math.floor(
@@ -125,14 +127,14 @@ skills.forEach((skill) => {
   });
 });
 
-CharacterSchema.virtual("CalculateProficiencyBonus").get(function () {
-  // if (this.level >= 17) return 6;
-  // if (this.level >= 13) return 5;
-  // if (this.level >= 9) return 4;
-  // if (this.level >= 5) return 3;
-  // return 2;
-  return 2 + Math.floor((this.level - 1) / 4);
-});
+// CharacterSchema.virtual("profBonus").get(function () {
+// if (this.level >= 17) return 6;
+// if (this.level >= 13) return 5;
+// if (this.level >= 9) return 4;
+// if (this.level >= 5) return 3;
+// return 2;
+//   return calculateProficiencyBonus(this.level);
+// });
 
 CharacterSchema.set("toJSON", { virtuals: true });
 CharacterSchema.set("toObject", { virtuals: true });

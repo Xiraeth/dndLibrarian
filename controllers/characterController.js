@@ -4,6 +4,20 @@ const { body, validationResult } = require("express-validator");
 
 const Character = require("../models/character");
 const User = require("../models/user");
+const {
+  calculateProficiencyBonus,
+  decideSavingThrowsProficiencies,
+  decideLanguages,
+} = require("../public/javascripts/functions.js");
+
+const ABILITIES = [
+  "strength",
+  "dexterity",
+  "constitution",
+  "intelligence",
+  "wisdom",
+  "charisma",
+];
 
 // exports.renderCharacters = asyncHandler(async (req, res, next) => {
 //   res.render("myCharacters", { title: "My characters" });
@@ -12,9 +26,19 @@ const User = require("../models/user");
 exports.renderCharacter = asyncHandler(async (req, res, next) => {
   const characterId = req.params.id;
   const character = await Character.findById(characterId);
+  const user = req.user;
+
+  if (!user) {
+    res.redirect("/");
+  }
+
+  const allUserCharacters = await Character?.find({
+    _id: { $in: user.characters },
+  });
 
   res.render("characterPage", {
     character,
+    allUserCharacters,
     title: `My characters - ${character.name}`,
   });
 });
@@ -39,6 +63,7 @@ exports.post_createCharacter = [
     .trim()
     .custom((value) => {
       if (value <= 0) throw new Error("Level cannot be less than 1.");
+      if (value > 20) throw new Error("Level cannot be more than 20.");
       return true;
     })
     .escape(),
@@ -118,7 +143,7 @@ exports.post_createCharacter = [
     })
     .escape(),
 
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     const user = req.user;
 
@@ -158,7 +183,7 @@ exports.post_createCharacter = [
         speed: req.body.speedInput,
         maxHP: req.body.hpInput,
         currentHP: req.body.hpInput,
-        temporaryHP: req.body.hpInput,
+        temporaryHP: 0,
         hitDice: req.body.hpInput,
         equipment: [],
       },
@@ -186,21 +211,36 @@ exports.post_createCharacter = [
         character,
       });
     } else {
-      character.savingThrows = {
-        strength: character.strengthModifier,
-        dexterity: character.dexterityModifier,
-        constitution: character.constitutionModifier,
-        intelligence: character.intelligenceModifier,
-        wisdom: character.wisdomModifier,
-        charisma: character.charismaModifier,
-      };
-      character.proficiencyBonus = character.CalculateProficiencyBonus;
+      character.proficiencyBonus = calculateProficiencyBonus(character.level);
+      character.savingThrowProficiencies = decideSavingThrowsProficiencies(
+        character.class
+      );
 
-      await character.save();
-      user.characters.push(character._id);
+      const savingThrows = {};
 
-      await user.save();
-      res.redirect("/");
+      ABILITIES.forEach((ability) => {
+        savingThrows[ability] =
+          character[`${ability}Modifier`] +
+          (character.savingThrowProficiencies.includes(ability)
+            ? character.proficiencyBonus
+            : 0);
+      });
+      character.savingThrows = savingThrows;
+      character.languages = decideLanguages(character.race);
+
+      try {
+        await character.save();
+        user.characters.push(character._id);
+        await user.save();
+        res.redirect("/");
+      } catch (err) {
+        console.error(err);
+        res.status(500).render("createCharacter", {
+          title: "Character creation",
+          errors: [{ msg: "Internal server error. Please try again." }],
+          character,
+        });
+      }
     }
   }),
 ];
@@ -208,6 +248,15 @@ exports.post_createCharacter = [
 exports.post_deleteCharacter = asyncHandler(async (req, res) => {
   const characterId = req.params.id;
   const character = await Character.findByIdAndDelete(characterId);
+
+  if (!character) {
+    return res.status(404).send("Character not found");
+  }
+
+  await User.updateOne(
+    { characters: characterId },
+    { $pull: { characters: characterId } }
+  );
 
   res.redirect("/");
 });

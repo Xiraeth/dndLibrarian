@@ -5,7 +5,12 @@ const modal = document.getElementById("deleteCharModal");
 const hideModalButton = document.getElementById("cancelDeleteButton");
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (showModalButton) {
+  const path = window.location.pathname;
+  const pathArray = path?.split("/");
+
+  const isPageDeleteCharacter = pathArray?.includes("myCharacters");
+
+  if (isPageDeleteCharacter) {
     showModalButton.addEventListener(
       "click",
       () => (modal.style.display = "flex")
