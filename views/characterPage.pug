@@ -82,9 +82,9 @@ block content
         div Are you sure you want to delete the character?
         div#modalSubmitButtons
           form(action=`/deleteCharacter/${character._id}` method="POST")
-            button#confirmDeleteButton(type="submit" class="bg-red-500 py-2 px-4 text-white rounded hover:bg-red-700 transition-colors duration-150") 
-              | Yes, Delete
-          button#cancelDeleteButton(class="bg-gray-500 text-white rounded py-2 px-4 hover:bg-gray-700 transition-colors duration-150") Cancel
+            button#confirmDeleteButton(type="submit" class="bg-red-500 text-[0.9rem] py-2 w-[100px] text-white rounded hover:bg-red-700 transition-colors duration-150 shadow-[1px_3px_8px_2px_rgba(0,0,0,0.4)]") 
+              | Yes
+          button#cancelDeleteButton(class="bg-gray-500 text-white text-[0.9rem] rounded py-2 w-[100px] hover:bg-gray-700 transition-colors duration-150 shadow-[1px_3px_8px_2px_rgba(0,0,0,0.4)]") No
 
 
 
