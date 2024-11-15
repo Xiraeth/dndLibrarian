@@ -9,7 +9,15 @@ const {
   decideSavingThrowsProficiencies,
   decideLanguages,
 } = require("../public/javascripts/functions.js");
-const { ABILITIES } = require("../public/javascripts/constants");
+
+const ABILITIES = [
+  "strength",
+  "dexterity",
+  "constitution",
+  "intelligence",
+  "wisdom",
+  "charisma",
+];
 
 // exports.renderCharacters = asyncHandler(async (req, res, next) => {
 //   res.render("myCharacters", { title: "My characters" });
@@ -45,6 +53,7 @@ exports.post_createCharacter = [
     .trim()
     .custom((value) => {
       if (value <= 0) throw new Error("Level cannot be less than 1.");
+      if (value > 20) throw new Error("Level cannot be more than 20.");
       return true;
     })
     .escape(),
@@ -151,12 +160,12 @@ exports.post_createCharacter = [
         wisdom: 0,
         charisma: 0,
       },
-      proficiencyBonus: calculateProficiencyBonus(req.body.level),
+      proficiencyBonus: 0,
       inspiration: 0,
       skillProficiencies: [],
-      savingThrowProficiencies: decideSavingThrowsProficiencies(req.body.class),
+      savingThrowProficiencies: [],
       otherProficiencies: [],
-      languages: decideLanguages(req.body.race),
+      languages: [],
       combatStats: {
         spells: [],
         armorClass: req.body.armorClassInput,
@@ -164,7 +173,7 @@ exports.post_createCharacter = [
         speed: req.body.speedInput,
         maxHP: req.body.hpInput,
         currentHP: req.body.hpInput,
-        temporaryHP: req.body.hpInput,
+        temporaryHP: 0,
         hitDice: req.body.hpInput,
         equipment: [],
       },
@@ -192,20 +201,36 @@ exports.post_createCharacter = [
         character,
       });
     } else {
-      character.savingThrows = ABILITIES.reduce((savingThrows, ability) => {
-        savingThrows[ability] = character.savingThrowProficiencies.includes(
-          ability
-        )
-          ? character[`${ability}Modifier`] + character.proficiencyBonus
-          : character[`${ability}Modifier`];
-        return savingThrows;
-      }, {});
+      character.proficiencyBonus = calculateProficiencyBonus(character.level);
+      character.savingThrowProficiencies = decideSavingThrowsProficiencies(
+        character.class
+      );
 
-      await character.save();
-      user.characters.push(character._id);
+      const savingThrows = {};
 
-      await user.save();
-      res.redirect("/");
+      ABILITIES.forEach((ability) => {
+        savingThrows[ability] =
+          character[`${ability}Modifier`] +
+          (character.savingThrowProficiencies.includes(ability)
+            ? character.proficiencyBonus
+            : 0);
+      });
+      character.savingThrows = savingThrows;
+      character.languages = decideLanguages(character.race);
+
+      try {
+        await character.save();
+        user.characters.push(character._id);
+        await user.save();
+        res.redirect("/");
+      } catch (err) {
+        console.error(err);
+        res.status(500).render("createCharacter", {
+          title: "Character creation",
+          errors: [{ msg: "Internal server error. Please try again." }],
+          character,
+        });
+      }
     }
   }),
 ];

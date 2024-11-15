@@ -2,8 +2,9 @@ const calculateProficiencyBonus = (level) => {
   return 2 + Math.floor((level - 1) / 4);
 };
 
-const decideSavingThrowsProficiencies = (className) => {
-  switch (className.toLowerCase()) {
+const decideSavingThrowsProficiencies = (dndClass) => {
+  console.log(dndClass);
+  switch (dndClass?.toLowerCase()) {
     case "barbarian":
       return ["strength", "constitution"];
     case "bard":
@@ -34,7 +35,7 @@ const decideSavingThrowsProficiencies = (className) => {
 };
 
 const decideLanguages = (race) => {
-  switch (race.toLowerCase()) {
+  switch (race?.toLowerCase()) {
     case "dwarf":
       return ["Common", "Dwarvish"];
     case "elf":

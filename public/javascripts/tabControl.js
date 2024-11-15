@@ -30,8 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
       ) || "";
     if (!targetTab) return;
 
-    console.log(targetTab);
-
     tabsButtons.forEach((button) => {
       button.classList.remove("activeTab");
       button.style.backgroundColor = tabMainBgColor;
