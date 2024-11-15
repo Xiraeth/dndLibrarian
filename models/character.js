@@ -1,3 +1,7 @@
+const {
+  calculateProficiencyBonus,
+} = require("../public/javascripts/functions.js");
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -112,8 +116,6 @@ const skills = [
   { name: "survival", ability: "wisdom" },
 ];
 
-// CharacterSchema.virtual('acrobatics').get(function() {});
-// character.acrobatics;
 skills.forEach((skill) => {
   CharacterSchema.virtual(skill.name).get(function () {
     const abilityModifier = Math.floor(
@@ -131,7 +133,7 @@ CharacterSchema.virtual("CalculateProficiencyBonus").get(function () {
   // if (this.level >= 9) return 4;
   // if (this.level >= 5) return 3;
   // return 2;
-  return 2 + Math.floor((this.level - 1) / 4);
+  return calculateProficiencyBonus(this.level);
 });
 
 CharacterSchema.set("toJSON", { virtuals: true });

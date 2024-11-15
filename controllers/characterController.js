@@ -4,6 +4,12 @@ const { body, validationResult } = require("express-validator");
 
 const Character = require("../models/character");
 const User = require("../models/user");
+const {
+  calculateProficiencyBonus,
+  decideSavingThrowsProficiencies,
+  decideLanguages,
+} = require("../public/javascripts/functions.js");
+const { ABILITIES } = require("../public/javascripts/constants");
 
 // exports.renderCharacters = asyncHandler(async (req, res, next) => {
 //   res.render("myCharacters", { title: "My characters" });
@@ -118,7 +124,7 @@ exports.post_createCharacter = [
     })
     .escape(),
 
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     const user = req.user;
 
@@ -145,12 +151,12 @@ exports.post_createCharacter = [
         wisdom: 0,
         charisma: 0,
       },
-      proficiencyBonus: 0,
+      proficiencyBonus: calculateProficiencyBonus(req.body.level),
       inspiration: 0,
       skillProficiencies: [],
-      savingThrowProficiencies: [],
+      savingThrowProficiencies: decideSavingThrowsProficiencies(req.body.class),
       otherProficiencies: [],
-      languages: [],
+      languages: decideLanguages(req.body.race),
       combatStats: {
         spells: [],
         armorClass: req.body.armorClassInput,
@@ -186,15 +192,14 @@ exports.post_createCharacter = [
         character,
       });
     } else {
-      character.savingThrows = {
-        strength: character.strengthModifier,
-        dexterity: character.dexterityModifier,
-        constitution: character.constitutionModifier,
-        intelligence: character.intelligenceModifier,
-        wisdom: character.wisdomModifier,
-        charisma: character.charismaModifier,
-      };
-      character.proficiencyBonus = character.CalculateProficiencyBonus;
+      character.savingThrows = ABILITIES.reduce((savingThrows, ability) => {
+        savingThrows[ability] = character.savingThrowProficiencies.includes(
+          ability
+        )
+          ? character[`${ability}Modifier`] + character.proficiencyBonus
+          : character[`${ability}Modifier`];
+        return savingThrows;
+      }, {});
 
       await character.save();
       user.characters.push(character._id);
