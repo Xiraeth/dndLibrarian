@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --yellow: #fcd34d;
+    --yellow-hover: #fde047;
+    --orange-focus: #fbbf24;
+    --opacity-yellow: #fde04755;
+  }
+
   @font-face {
     font-family: mont;
     src: url(../fonts/Montserrat.ttf);
@@ -19,19 +26,19 @@
   }
 
   input:focus {
-    box-shadow: 0 0 5px 1px #fcd34d;
+    box-shadow: 0 0 5px 1px var(--yelow);
   }
 
   #tabsContainer > button {
     font-family: cactus;
-    background-color: #fcd34d;
+    background-color: var(--yellow);
     color: black;
     height: 4rem;
   }
 
-  #tabsContainer > button:hover:not(.activeTab) {
+  #tabsContainer > button:not(.activeTab):hover {
     color: black;
-    background-color: #ffe796;
+    background-color: var(--orange-focus);
   }
 
   #tabsContainer > .activeTab {
@@ -51,7 +58,7 @@
     min-width: 200px;
     padding: 5px 10px;
     outline: none;
-    border: 2px solid #fde04755;
+    border: 2px solid var(--opacity-yellow);
     border-radius: 5px;
     background: transparent;
     color: white;
@@ -61,7 +68,7 @@
 
   .input-group > input:focus {
     box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.6);
-    border: 2px solid #fde047;
+    border: 2px solid var(--yellow-hover);
   }
 
   .input-group > select {
@@ -70,7 +77,7 @@
     background-color: transparent;
     padding: 5px 10px;
     outline: none;
-    border: 2px solid #fde04755;
+    border: 2px solid var(--opacity-yellow);
     border-radius: 5px;
     background: transparent;
     box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.5);
@@ -79,7 +86,7 @@
   .input-group > select:focus {
     box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.6);
     background-color: rgba(0, 0, 0, 0.8);
-    border: 2px solid #fde047;
+    border: 2px solid var(--yellow-hover);
   }
 
   .input-group > textarea {
@@ -87,7 +94,7 @@
     min-height: 50px;
     padding: 5px 10px;
     outline: none;
-    border: 2px solid #fde04755;
+    border: 2px solid var(--opacity-yellow);
     border-radius: 5px;
     background: transparent;
     color: white;
@@ -97,7 +104,7 @@
 
   .input-group > textarea:focus {
     box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.6);
-    border: 2px solid #fde047;
+    border: 2px solid var(--yellow-hover);
   }
 
   .submitBtn {
@@ -107,7 +114,7 @@
   }
 
   .submitBtn:focus {
-    background-color: #fde047;
+    background-color: var(--yellow-hover);
     box-shadow: 1px 4px 6px 1px rgba(0, 0, 0, 0.5);
   }
 
@@ -134,9 +141,9 @@
 
     translate: -50% -50%;
     background: rgb(44, 44, 44);
-    color: #fcd34d;
+    color: var(--yellow);
     padding: 0 2rem;
-    border: 2px solid #fcd34d;
+    border: 2px solid var(--yellow);
 
     width: 350px;
     height: 200px;
@@ -170,7 +177,7 @@
   #editCharacterForm input,
   #editCharacterForm select {
     background-color: transparent;
-    border: 1px solid #fde04755;
+    border: 1px solid var(--opacity-yellow);
   }
 
   #editCharacterForm input:focus {
@@ -183,7 +190,7 @@
     background-color: transparent;
     padding: 5px 10px;
     outline: none;
-    border: 2px solid #fde04755;
+    border: 2px solid var(--opacity-yellow);
     border-radius: 5px;
     background: transparent;
     box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.5);
@@ -192,12 +199,20 @@
   #editCharacterForm select:focus {
     box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.6);
     background-color: rgba(0, 0, 0, 0.8);
-    border: 2px solid #fde047;
+    border: 2px solid var(--yellow-hover);
   }
 
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+
+  #characterTabsContainer > .activeSection {
+    color: var(--yellow-hover);
+  }
+
+  #characterTabsContainer > button:not(.activeSection):hover {
+    color: var(--yellow-hover);
   }
 }

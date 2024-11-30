@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     tabsButtons.forEach((button) => {
       button.classList.remove("activeTab");
-      button.style.backgroundColor = tabMainBgColor;
+      button.style.removeProperty("background-color");
     });
 
     targetTab.style.backgroundColor = tabActiveBgColor;
@@ -53,10 +53,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       tabsButtons.forEach((button) => {
         button.classList.remove("activeTab");
-        button.style.backgroundColor = tabMainBgColor;
+        button.style.removeProperty("background-color");
       });
 
-      targetTab.style.backgroundColor = tabActiveBgColor;
+      targetTab.style.setProperty("background-color", tabActiveBgColor);
       targetTab.classList.add("activeTab");
 
       sessionStorage.setItem("activeTabButtonName", tabName);
@@ -100,6 +100,7 @@ function flashButton(button) {
   button.style.backgroundColor = "crimson";
   setTimeout(function () {
     button.style.backgroundColor = tabMainBgColor;
+    button.style.color = "black";
     if (button.classList.contains("activeTab")) {
       button.style.backgroundColor = tabActiveBgColor;
     }

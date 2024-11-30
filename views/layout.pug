@@ -21,6 +21,11 @@ html
                 for char in allUserCharacters
                   div(class="w-full border-b-[1px] border-b-black text-center py-2 text-black hover:bg-indigo-500 transition-all duration-150") 
                     a(href=`/myCharacters/${char._id}` class="block w-full h-full") #{char.name}
+      if character
+        div#characterTabsContainer.flex.gap-6
+          button(class="bg-transparent border-b-2 border-b-black rounded-none text-xl activeSection") Main
+          button(class="bg-transparent border-b-2 border-b-black rounded-none text-xl") Personality
+          button(class="bg-transparent border-b-2 border-b-black rounded-none text-xl") Spells
       if currentUser 
         div#connectButtons(class="text-lg lg:text-2xl flex gap-10")
           if character
