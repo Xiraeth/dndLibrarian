@@ -34,7 +34,7 @@ block content
             option(value="Tiefling" selected=(character && character.race === 'Tiefling' ? true : false)) Tiefling
             option(value="Custom" selected=(character && character.race === 'Custom' ? true : false)) Custom
           if character.background 
-            input(type="text" autocomplete="off" value=character.background name="backrground" class="text-2xl px-2 w-40")
+            input(type="text" autocomplete="off" value=character.background name="background" class="text-2xl px-2 w-40")
           select#dndAlignment(name="dndAlignment" class="px-2 py-1 text-xl" required value=(undefined === character.alignment ? '' : character.alignment))
             option(value="Lawful Good" selected=(character && character.alignment === 'Lawful Good' ? true : false)) Lawful Good
             option(value="Lawful Neutral" selected=(character && character.alignment === 'Lawful neutral' ? true : false)) Lawful Neutral

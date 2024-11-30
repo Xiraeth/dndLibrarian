@@ -14,7 +14,8 @@ html
         a(href="/" class="lg:text-3xl text-xl font-cactus text-amber-300 hover:text-amber-400 transition-colors duration-150") Home
         if character && allUserCharacters
           div#characterDropdownContainer(class="relative h-[40px] w-[100px] flex items-center justify-center cursor-pointer")
-            span(class="text-indigo-300 bg-transparent h-[40px] w-[100px] transition-all border-2 border-indigo-500 flex items-center justify-center hover:text-black duration-150 hover:bg-indigo-500") #{character.name}
+            span(class="text-indigo-300 bg-transparent h-[40px] w-[100px] transition-all border-2 border-indigo-500 flex items-center justify-center gap-2 hover:text-black duration-150 hover:bg-indigo-500") #{character.name}
+              i(class="fa-solid fa-chevron-down text-sm")
             div.characterdropdown(class="absolute top-[100%] left-0 bg-indigo-400 w-full hidden shadow-md overflow-hidden z-10")
               if allUserCharacters
                 for char in allUserCharacters

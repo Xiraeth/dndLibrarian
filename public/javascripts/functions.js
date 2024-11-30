@@ -3,7 +3,6 @@ const calculateProficiencyBonus = (level) => {
 };
 
 const decideSavingThrowsProficiencies = (dndClass) => {
-  console.log(dndClass);
   switch (dndClass?.toLowerCase()) {
     case "barbarian":
       return ["strength", "constitution"];
