@@ -38,7 +38,7 @@ block content
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Strength
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
             div.flex.justify-center.w-full.items-center.gap-x-6
-              span(class="text-2xl lg:text-3xl") #{character.abilityScores.strength}  
+              span(class="text-2xl lg:text-3xl") #{character.abilityScores.strength}
               span(class=`${character.strengthModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.strengthModifier > 0 ? "+" + character.strengthModifier : character.strengthModifier}`})
             p(class=`${character.savingThrows.strength >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.strength > 0 ? "+" + character.savingThrows.strength : character.savingThrows.strength}`}]
         div(class="min-w-32")
@@ -82,9 +82,9 @@ block content
         div Are you sure you want to delete the character?
         div#modalSubmitButtons
           form(action=`/deleteCharacter/${character._id}` method="POST")
-            button#confirmDeleteButton(type="submit" class="bg-red-500 py-2 px-4 text-white rounded hover:bg-red-700 transition-colors duration-150") 
-              | Yes, Delete
-          button#cancelDeleteButton(class="bg-gray-500 text-white rounded py-2 px-4 hover:bg-gray-700 transition-colors duration-150") Cancel
+            button#confirmDeleteButton(type="submit" class="bg-red-500 text-[0.9rem] py-2 w-[100px] text-white rounded hover:bg-red-700 transition-colors duration-150 shadow-[1px_3px_8px_2px_rgba(0,0,0,0.4)]") 
+              | Yes
+          button#cancelDeleteButton(class="bg-gray-500 text-white text-[0.9rem] rounded py-2 w-[100px] hover:bg-gray-700 transition-colors duration-150 shadow-[1px_3px_8px_2px_rgba(0,0,0,0.4)]") No
 
 
 

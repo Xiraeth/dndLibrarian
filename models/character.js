@@ -9,7 +9,7 @@ const CharacterSchema = new Schema({
   name: { type: String, required: true, minlength: 1 },
   class: { type: String, required: true },
   race: { type: String, required: true },
-  level: { type: Number, required: true, max: 20 },
+  level: { type: Number, required: true, max: 20, min: 1 },
   background: { type: String, required: false, default: "" },
   alignment: { type: String, required: true },
   abilityScores: {
