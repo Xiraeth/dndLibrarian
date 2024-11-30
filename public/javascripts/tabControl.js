@@ -1,7 +1,6 @@
 "use strict";
 
-const tabMainBgColor = "#fcd34d";
-const tabActiveBgColor = "#008080";
+const tabActiveBgColor = "#6366f1";
 
 document.addEventListener("DOMContentLoaded", function () {
   const allInputs = document.querySelectorAll("#createCharForm input");
@@ -33,9 +32,11 @@ document.addEventListener("DOMContentLoaded", function () {
     tabsButtons.forEach((button) => {
       button.classList.remove("activeTab");
       button.style.removeProperty("background-color");
+      button.style.removeProperty("color");
     });
 
     targetTab.style.backgroundColor = tabActiveBgColor;
+    targetTab.style.color = "white";
     targetTab.classList.add("activeTab");
 
     allTabs.forEach((tab) => tab.classList.add("hidden"));
@@ -54,9 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
       tabsButtons.forEach((button) => {
         button.classList.remove("activeTab");
         button.style.removeProperty("background-color");
+        button.style.removeProperty("color");
       });
 
       targetTab.style.setProperty("background-color", tabActiveBgColor);
+      targetTab.style.color = "white";
       targetTab.classList.add("activeTab");
 
       sessionStorage.setItem("activeTabButtonName", tabName);
@@ -99,8 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function flashButton(button) {
   button.style.backgroundColor = "crimson";
   setTimeout(function () {
-    button.style.backgroundColor = tabMainBgColor;
-    button.style.color = "black";
+    button.style.removeProperty("background-color");
     if (button.classList.contains("activeTab")) {
       button.style.backgroundColor = tabActiveBgColor;
     }

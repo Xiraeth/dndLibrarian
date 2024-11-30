@@ -449,8 +449,10 @@ video {
 :root {
   --yellow: #fcd34d;
   --yellow-hover: #fde047;
-  --orange-focus: #fbbf24;
+  --orange-hover: #fbbf24;
   --opacity-yellow: #fde04755;
+  --indigo-base: #818cf8;
+  --indigo-hover: #6366f1;
 }
 
 @font-face {
@@ -482,13 +484,12 @@ input:focus {
 }
 
 #tabsContainer > button:not(.activeTab):hover {
-  color: black;
-  background-color: var(--orange-focus);
+  background-color: var(--orange-hover);
 }
 
 #tabsContainer > .activeTab {
-  background-color: #008080;
   color: white;
+  background-color: var(--indigo-hover);
 }
 
 .input-group > label {
@@ -565,6 +566,7 @@ input:focus {
 
 .submitBtn:active {
   transform: translateY(1px);
+  box-shadow: 1px 3px 4px 2px rgba(0, 0, 0, 0.4);
 }
 
 #deleteCharModal {
@@ -1129,6 +1131,11 @@ input[type="number"]::-webkit-inner-spin-button,
   border-bottom-color: rgb(255 255 255 / 0.5);
 }
 
+.bg-amber-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 211 77 / var(--tw-bg-opacity));
+}
+
 .bg-amber-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(251 191 36 / var(--tw-bg-opacity));
@@ -1473,6 +1480,11 @@ input[type="number"]::-webkit-inner-spin-button,
 .hover\:bg-amber-300:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(252 211 77 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-amber-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 191 36 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-blue-400\/90:hover {
