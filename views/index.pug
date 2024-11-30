@@ -4,7 +4,7 @@ block content
   if currentUser 
     p.text-center.font-bold.text-amber-400.italic.mb-20(class="xl:text-5xl sm:text-3xl text-2xl") Welcome back, #{currentUser.username}
     if characters.length 
-      p.text-4xl.text-emerald-400.text-center.mb-10 You currently have the following characters:
+      p.text-emerald-400.text-center.mb-10(class="xl:text-3xl lg:text-2xl text-xl") You currently have the following characters:
       div#myCharactersContainer(class="w-11/12 mx-auto flex flex-wrap gap-20 justify-center")
         for character in characters
           a(href=`/myCharacters/${character._id}` class="bg-indigo-400 hover:bg-indigo-500 text-black rounded-lg characterContainer flex flex-col justify-between items-center gap-5 p-5 min-w-32 w-1/6 text-center xl:text-2xl sm:text-lg text-base font-mont cursor-pointer outline outline-2 outline-black shadow-md shadow-amber-300/70 hover:shadow-lg hover:shadow-amber-400/90 hover:scale-110 transition-all duration-300 min-h-40")

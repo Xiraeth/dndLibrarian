@@ -3,9 +3,9 @@ extends layout
 block content 
   if currentUser
     div#characterContentContainer(class="mx-10 font-mont")
-      div.first-row.flex.justify-between.items-center.mb-4.border-b-2.border-indigo-400(class="sm:flex-row flex-col lg:gap-x-4")
+      div.first-row.flex.justify-between.items-center.mb-4.border-b-2.border-indigo-400(class="md:flex-row flex-col lg:gap-x-4")
         h1.text-indigo-400(class="xl:text-5xl lg:text-4xl text-3xl") #{character.name}
-        div.flex.items-center.align-bottom.justify-between.gap-x-10(class="lg:w-full sm:flex-row flex-col relative lg:top-1")
+        div.flex.items-center.align-bottom.justify-between.gap-x-10(class="lg:w-full md:flex-row flex-col relative lg:top-1")
           h1.mr-auto(class="xl:text-3xl text-2xl") Level #{character.level} #{character.race} #{character.class}
           h1(class="xl:text-3xl text-2xl") #{character.background && `${character.background},`} #{character.alignment}
       div.second-row.flex.justify-between(class="lg:flex-row flex-col")
