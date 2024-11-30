@@ -6,6 +6,7 @@ html
     script(src="/javascripts/tabControl.js" defer)
     script(src="/javascripts/deleteCharacterControl.js" defer)
     script(src="/javascripts/dropdownControl.js" defer)
+    script(src="/javascripts/editCharForm.js" defer)
     script(src="https://kit.fontawesome.com/00de2a7224.js" crossorigin="anonymous")
   body(class="text-white bg-[url('/images/bg.jpg')] bg-no-repeat bg-fixed sm:bg-center")
     div(class="header py-8 px-10 flex justify-between items-center")
@@ -13,7 +14,7 @@ html
         a(href="/" class="lg:text-3xl text-xl font-cactus text-amber-300 hover:text-amber-400 transition-colors duration-150") Home
         if character
           div#characterDropdownContainer(class="relative h-[40px] w-[100px] flex items-center justify-center cursor-pointer")
-            span(class="text-black bg-indigo-400 h-[40px] w-[100px] transition-all border-b-[1px] flex items-center justify-center border-b-black duration-150 hover:bg-indigo-500") #{character.name}
+            span(class="text-indigo-300 bg-transparent h-[40px] w-[100px] transition-all border-2 border-indigo-500 flex items-center justify-center hover:text-black duration-150 hover:bg-indigo-500") #{character.name}
             div.characterdropdown(class="absolute top-[100%] left-0 bg-indigo-400 w-full hidden shadow-md overflow-hidden z-10")
               for char in allUserCharacters
                 div(class="w-full border-b-[1px] border-b-black text-center py-2 text-black hover:bg-indigo-500 transition-all duration-150") 
@@ -21,8 +22,11 @@ html
       if currentUser 
         div#connectButtons(class="text-lg lg:text-2xl flex gap-10")
           if character
-            a(href="/editCharacter" class="font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150") Edit
-            a(href="#" id="deleteButtonShowModal" class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150") Delete
+            if mode === 'edit'
+              a(href=`/myCharacters/${character._id}`  class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150") Cancel
+            else
+              a(href=`/editCharacter/${character._id}` class="font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150") Edit
+              a(href="#" id="deleteButtonShowModal" class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150") Delete
           a(href="/logout" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Logout
       else
         div#connectButtons(class="text-lg lg:text-2xl flex gap-10")

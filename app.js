@@ -18,6 +18,7 @@ const logoutRouter = require("./routes/logout");
 const myCharactersRouter = require("./routes/myCharacters");
 const createCharacterRouter = require("./routes/createCharacter");
 const deleteCharacterRouter = require("./routes/deleteCharacter");
+const editCharacterRouter = require("./routes/editCharacter");
 
 require("dotenv").config();
 
@@ -29,10 +30,10 @@ const User = require("./models/user");
 mongoose.set("strictQuery", false);
 const mongoDbUrl = process.env.DB_URI;
 
-main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDbUrl);
 }
+main().catch((err) => console.log(err));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -87,7 +88,6 @@ app.use((req, res, next) => {
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compression());
 app.use(express.static(path.join(__dirname, "public")));
@@ -99,6 +99,7 @@ app.use("/signup", signupRouter);
 app.use("/logout", logoutRouter);
 app.use("/myCharacters", myCharactersRouter);
 app.use("/createCharacter", createCharacterRouter);
+app.use("/editCharacter", editCharacterRouter);
 app.use("/deleteCharacter", deleteCharacterRouter);
 
 // catch 404 and forward to error handler

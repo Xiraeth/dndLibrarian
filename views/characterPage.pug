@@ -38,7 +38,7 @@ block content
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Strength
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") 
             div.flex.justify-center.w-full.items-center.gap-x-6
-              span(class="text-2xl lg:text-3xl") #{character.abilityScores.strength}  
+              span(class="text-2xl lg:text-3xl") #{character.abilityScores.strength}
               span(class=`${character.strengthModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.strengthModifier > 0 ? "+" + character.strengthModifier : character.strengthModifier}`})
             p(class=`${character.savingThrows.strength >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.strength > 0 ? "+" + character.savingThrows.strength : character.savingThrows.strength}`}]
         div(class="min-w-32")

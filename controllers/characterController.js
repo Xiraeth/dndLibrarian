@@ -260,3 +260,212 @@ exports.post_deleteCharacter = asyncHandler(async (req, res) => {
 
   res.redirect("/");
 });
+
+exports.get_editCharacter = asyncHandler(async (req, res) => {
+  const characterId = req.params.id;
+  const character = await Character.findById(characterId);
+
+  const user = req.user;
+
+  if (!user) {
+    res.redirect("/");
+  }
+
+  const allUserCharacters = await Character?.find({
+    _id: { $in: user.characters },
+  });
+
+  res.render("editCharacter", {
+    character,
+    title: `Edit character ${character.name}`,
+    allUserCharacters,
+    mode: "edit",
+  });
+});
+
+exports.post_editCharacter = [
+  body("dndName")
+    .trim()
+    .custom((value) => {
+      if (value === "") throw new Error("Name cannot be empty.");
+      else if (value.length > 32)
+        throw new Error("Name cannot be more than 32 characters long.");
+      return true;
+    })
+    .escape(),
+  body("dndClass", "Class field cannot be blank").escape(),
+  body("dndRace", "Race field cannot be blank").escape(),
+  body("level")
+    .trim()
+    .custom((value) => {
+      if (value <= 0) throw new Error("Level cannot be less than 1.");
+      if (value > 20) throw new Error("Level cannot be more than 20.");
+      return true;
+    })
+    .escape(),
+  body("dndAlignment", "Alignment field cannot be blank").escape(),
+  body("strength")
+    .trim()
+    .custom((value) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("constitution")
+    .trim()
+    .custom((value) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("dexterity")
+    .trim()
+    .custom((value) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("intelligence")
+    .trim()
+    .custom((value) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("wisdom")
+    .trim()
+    .custom((value) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("charisma")
+    .trim()
+    .custom((value) => {
+      if (value < 0) throw new Error("Ability scores cannot be less than 0.");
+      return true;
+    })
+    .escape(),
+  body("armorClass")
+    .trim()
+    .custom((value) => {
+      if (value === "" || value < 0)
+        throw new Error("'Armor class' must be a positive integer.");
+      return true;
+    })
+    .escape(),
+  body("speed")
+    .trim()
+    .custom((value) => {
+      if (value === "" || value < 0)
+        throw new Error("'Speed' must be a positive integer.");
+      return true;
+    })
+    .escape(),
+  body("initiative")
+    .trim()
+    .custom((value) => {
+      if (value === "" || value < 0)
+        throw new Error("'Initiative' must be a positive integer.");
+      return true;
+    })
+    .escape(),
+  body("hitpoints")
+    .trim()
+    .custom((value) => {
+      if (value === "" || value < 0)
+        throw new Error("'Hitpoints' must be a positive integer.");
+      return true;
+    })
+    .escape(),
+
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    const charId = req.params.id;
+    const user = req.user;
+
+    // Find the character by ID
+    const character = await Character.findById(charId);
+
+    if (!character) {
+      return res.status(404).render("error", {
+        message: "Character not found",
+        status: 404,
+      });
+    }
+
+    if (!errors.isEmpty()) {
+      return res.render("editCharacter", {
+        title: "Edit Character",
+        errors: errors.array(),
+        character,
+      });
+    } else {
+      try {
+        // Update character fields
+        character.name = req.body.dndName;
+        character.class = req.body.dndClass;
+        character.race = req.body.dndRace;
+        character.level = req.body.level;
+        character.alignment = req.body.dndAlignment;
+        character.inspiration = req.body.inspiration;
+        character.abilityScores = {
+          strength: req.body.strength,
+          dexterity: req.body.dexterity,
+          constitution: req.body.constitution,
+          intelligence: req.body.intelligence,
+          wisdom: req.body.wisdom,
+          charisma: req.body.charisma,
+        };
+        character.combatStats = {
+          armorClass: req.body.armorClass,
+          speed: req.body.speed,
+          initiative: req.body.initiative,
+          currentHP: req.body.hitpoints,
+          maxHP: req.body.hitpoints, // Or handle this differently if required
+        };
+
+        // Update calculated fields
+        character.proficiencyBonus = calculateProficiencyBonus(character.level);
+        character.savingThrowProficiencies = decideSavingThrowsProficiencies(
+          character.class
+        );
+
+        const savingThrows = {};
+        ABILITIES.forEach((ability) => {
+          savingThrows[ability] =
+            character.abilityScores[`${ability}`] +
+            (character.savingThrowProficiencies.includes(ability)
+              ? character.proficiencyBonus
+              : 0);
+        });
+        character.savingThrows = savingThrows;
+        character.languages = decideLanguages(character.race);
+
+        // Save the character
+        await character.save();
+
+        // Update the user document
+        const charIndex = user.characters.findIndex(
+          (charId) => charId.toString() === character._id.toString()
+        );
+        if (charIndex !== -1) {
+          user.characters[charIndex] = character._id; // Redundant but ensures consistency
+        } else {
+          user.characters.push(character._id); // Add the character if missing
+        }
+        await user.save();
+
+        // Redirect to a success page or character's detail view
+        res.redirect(`/myCharacters/${character._id}`);
+      } catch (err) {
+        console.error(err);
+        res.status(500).render("editCharacter", {
+          title: "Edit Character",
+          errors: [{ msg: "Internal server error. Please try again." }],
+          character,
+        });
+      }
+    }
+  }),
+];
