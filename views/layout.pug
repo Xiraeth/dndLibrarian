@@ -11,33 +11,33 @@ html
   body(class="text-white bg-[url('/images/bg.jpg')] bg-no-repeat bg-fixed sm:bg-center")
     div(class="header py-8 px-10 flex justify-between items-center")
       div(class="flex items-center justify-between gap-8 h-[40px]")
-        a(href="/" class="lg:text-3xl text-xl font-cactus text-amber-300 hover:text-amber-400 transition-colors duration-150") Home
+        a(href="/" class="lg:text-3xl font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150") Home
         if character && allUserCharacters
-          div#characterDropdownContainer(class="relative h-[40px] w-[100px] flex items-center justify-center cursor-pointer")
-            span(class="text-indigo-300 bg-transparent h-[40px] w-[100px] transition-all border-2 border-indigo-500 flex items-center justify-center gap-2 hover:text-black duration-150 hover:bg-indigo-500") #{character.name}
+          div#characterDropdownContainer(class="relative select-none h-[40px] w-[140px] flex items-center justify-center cursor-pointer")
+            span(class="text-indigo-300 bg-transparent h-[40px] w-[140px] transition-all border-2 border-indigo-500 flex items-center justify-center gap-2 hover:text-black duration-150 hover:bg-indigo-500") Characters
               i(class="fa-solid fa-chevron-down text-sm")
-            div.characterdropdown(class="absolute top-[100%] left-0 bg-indigo-400 w-full hidden shadow-md overflow-hidden z-10")
+            div.characterdropdown(class="absolute top-[100%] border-t-[1px] border-t-black left-0 bg-indigo-400 w-full hidden shadow-md overflow-hidden z-10")
               if allUserCharacters
                 for char in allUserCharacters
                   div(class="w-full border-b-[1px] border-b-black text-center py-2 text-black hover:bg-indigo-500 transition-all duration-150") 
                     a(href=`/myCharacters/${char._id}` class="block w-full h-full") #{char.name}
-      if character
-        div#characterTabsContainer.flex.gap-6
-          button(class="bg-transparent border-b-2 border-b-black rounded-none text-xl activeSection") Main
-          button(class="bg-transparent border-b-2 border-b-black rounded-none text-xl") Personality
-          button(class="bg-transparent border-b-2 border-b-black rounded-none text-xl") Spells
+      //- if character
+      //-   div#characterTabsContainer.flex.gap-6
+      //-     button(class="bg-transparent border-b-2 border-b-black rounded-none activeSection xl:text-2xl text-lg") Main
+      //-     button(class="bg-transparent border-b-2 border-b-black rounded-none xl:text-2xl text-lg") Personality
+      //-     button(class="bg-transparent border-b-2 border-b-black rounded-none xl:text-2xl text-lg") Spells
       if currentUser 
         div#connectButtons(class="text-lg lg:text-2xl flex gap-10")
           if character
             if mode === 'edit'
-              a(href=`#` id="submitEditCharForm" class="font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150") Save
-              a(href=`/myCharacters/${character._id}` class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150") Cancel
+              a(href=`#` id="submitEditCharForm" class="font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150 xl:text-2xl text-lg") Save
+              a(href=`/myCharacters/${character._id}` class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150 xl:text-2xl text-lg") Cancel
             else
-              a(href=`/editCharacter/${character._id}` class="font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150") Edit
-              a(href="#" id="deleteButtonShowModal" class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150") Delete
-          a(href="/logout" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Logout
+              a(href=`/editCharacter/${character._id}` class="font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150 xl:text-2xl text-lg") Edit
+              a(href="#" id="deleteButtonShowModal" class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150 xl:text-2xl text-lg") Delete
+          a(href="/logout" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150 xl:text-2xl text-lg") Logout
       else
         div#connectButtons(class="text-lg lg:text-2xl flex gap-10")
-          a(href="/login" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Log in
-          a(href="/signup" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Sign up
+          a(href="/login" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150 xl:text-2xl text-lg") Log in
+          a(href="/signup" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150 xl:text-2xl text-lg") Sign up
     block content

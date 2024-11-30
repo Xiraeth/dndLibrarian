@@ -5,8 +5,8 @@
 @layer base {
   :root {
     --yellow: #fcd34d;
-    --yellow-hover: #fde047;
-    --orange-hover: #fbbf24;
+    --yellow-hover: #fbbf24;
+    --orange-hover: #f59e0b;
     --opacity-yellow: #fde04755;
     --indigo-base: #818cf8;
     --indigo-hover: #6366f1;
@@ -183,7 +183,9 @@
   }
 
   #editCharacterForm input:focus {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--yellow-hover);
+    box-shadow: 0 0 5px 1px var(--opacity-yellow);
   }
 
   #editCharacterForm select {
@@ -216,5 +218,15 @@
 
   #characterTabsContainer > button:not(.activeSection):hover {
     color: var(--yellow-hover);
+  }
+
+  .isDropdownOpen {
+    color: black;
+    background-color: var(--indigo-hover);
+  }
+
+  .isDropdownOpen:hover {
+    color: black;
+    background-color: var(--indigo-hover);
   }
 }
