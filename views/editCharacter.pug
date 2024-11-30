@@ -4,11 +4,11 @@ block content
   if currentUser
     form#editCharacterForm(class="mx-10 font-mont" method="POST") 
       div.first-row.flex.justify-between.items-center.mb-4.border-b-2.border-indigo-400.pb-2(class="sm:flex-row flex-col lg:gap-x-4")
-        input.text-indigo-400(class="lg:text-4xl text-xl w-48 rounded-[5px] px-2 m-0" name="dndName" value=character.name)
+        input.text-indigo-400(class="lg:text-4xl text-xl w-48 rounded-[5px] px-2 m-0" autocomplete="off" required name="dndName" value=character.name)
         div.flex.items-center.align-bottom.justify-between.gap-x-2(class="lg:w-full sm:flex-row flex-col relative lg:top-1")
           label(class="lg:text-2xl text-xl w-fit") Level
-          input(class="lg:text-2xl text-xl w-12 text-center" name="level" value=character.level)
-          select#dndClass(required class=" text-xl px-2 py-1" name="dndClass" value=(undefined === character ? '' : character.dndClass))
+          input(type="number" class="lg:text-2xl text-xl w-12 text-center" required name="level" autocomplete="off" max=20 min=1 value=character.level)
+          select#dndClass(required class=" text-xl px-2 py-1" name="dndClass" autocomplete="off" value=(undefined === character ? '' : character.dndClass))
             option(value="Barbarian" selected=(character && character.class === 'Barbarian' ? true : false)) Barbarian
             option(value="Bard" selected=(character && character.class === 'Bard' ? true : false)) Bard
             option(value="Cleric" selected=(character && character.class === 'Cleric' ? true : false)) Cleric
@@ -21,7 +21,7 @@ block content
             option(value="Sorcerer" selected=(character && character.class === 'Sorcerer' ? true : false)) Sorcerer
             option(value="Warlock" selected=(character && character.class === 'Warlock' ? true : false)) Warlock
             option(value="Wizard" selected=(character && character.class === 'Wizard' ? true : false)) Wizard
-          select#dndRace(class=" text-xl px-2 py-1 mr-auto" name="dndRace" required value=(undefined === character ? '' : character.dndRace))
+          select#dndRace(class="text-xl px-2 py-1 mr-auto" autocomplete="off" name="dndRace" required value=(undefined === character ? '' : character.dndRace))
             option(value="") Select a race
             option(value="Dragonborn" selected=(character && character.race === 'Dragonborn' ? true : false)) Dragonborn
             option(value="Dwarf" selected=(character && character.race === 'Dwarf' ? true : false)) Dwarf
@@ -34,7 +34,7 @@ block content
             option(value="Tiefling" selected=(character && character.race === 'Tiefling' ? true : false)) Tiefling
             option(value="Custom" selected=(character && character.race === 'Custom' ? true : false)) Custom
           if character.background 
-            input(type="text" value=character.background name="backrground" class="text-2xl px-2 w-40")
+            input(type="text" autocomplete="off" value=character.background name="backrground" class="text-2xl px-2 w-40")
           select#dndAlignment(name="dndAlignment" class="px-2 py-1 text-xl" required value=(undefined === character.alignment ? '' : character.alignment))
             option(value="Lawful Good" selected=(character && character.alignment === 'Lawful Good' ? true : false)) Lawful Good
             option(value="Lawful Neutral" selected=(character && character.alignment === 'Lawful neutral' ? true : false)) Lawful Neutral
@@ -49,73 +49,79 @@ block content
         div.flex.flex-col.gap-5.text-lg(class="lg:mb-0 mb-7 lg:border-b-0 border-b-2 border-b-white/50 pb-7 justify-center")
           div.flex.gap-5.items-center(class="justify-between")
             p.text-cyan-300.text-2xl Inspiration:
-            input(class="rounded-sm w-10 py-2 text-center" name="inspiration" value=character.inspiration)
+            input(type="number" autocomplete="off" class="rounded-sm w-10 py-2 text-center" name="inspiration" value=character.inspiration)
           div.flex.gap-5.items-center(class="lg:justify-start justify-between")
             p.text-cyan-300.text-2xl Proficiency Bonus:
             span(class="bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm") #{character.proficiencyBonus} 
         div.flex.gap-10.text-lg(class="lg:flex-row flex-col lg:mb-0 lg:border-b-0 border-b-2 border-b-white/50 pb-7 lg:items-center")
           div.text-center.flex.gap-3(class="lg:flex-col flex-row items-center lg:justify-start justify-between")
             p.text-2xl.text-cyan-300 AC 
-            input(class=`bg-white/20 py-2 text-center rounded-sm w-12` name="armorClass" value=character.combatStats.armorClass)
+            input(type="number" autocomplete="off" class=`bg-white/20 py-2 text-center rounded-sm w-12` name="armorClass" value=character.combatStats.armorClass)
           div.text-center.flex.gap-3(class="lg:flex-col flex-row items-center lg:justify-start justify-between")
             p.text-2xl.text-cyan-300 Initiative 
-            input(class=`bg-white/20 py-2 text-center rounded-sm w-12` name="initiative" value=character.combatStats.initiative)
+            input(type="number" autocomplete="off" class=`bg-white/20 py-2 text-center rounded-sm w-12` name="initiative" value=character.combatStats.initiative)
           div.text-center.flex.gap-3(class="lg:flex-col flex-row items-center lg:justify-start justify-between")
             p.text-2xl.text-cyan-300 Speed
-            input(class=`bg-white/20 py-2 text-center rounded-sm w-12` name="speed" value=character.combatStats.speed)
+            input(type="number" autocomplete="off" class=`bg-white/20 py-2 text-center rounded-sm w-12` name="speed" value=character.combatStats.speed)
         div.flex.flex-col.gap-5.text-lg(class="lg:border-b-0 border-b-2 border-b-indigo-200 sm:py-0 py-8")
           p.text-2xl.text-cyan-300.flex.items-center.gap-4.justify-between Current Hitpoints: 
-            input(class="bg-white/20 w-12 py-2 text-center rounded-sm text-white text-lg" name="hitpoints" value=character.combatStats.currentHP) 
-            span(class="bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 lg:w-auto min-w-16 max-w-26 rounded-sm text-white text-lg text-right") / #{character.combatStats.maxHP}
+            input(type="number" autocomplete="off" class="bg-white/20 w-12 py-2 text-center rounded-sm text-white text-lg" name="currentHitpoints" value=character.combatStats.currentHP) 
+            span(class="w-2 rounded-sm text-white text-4xl font-bold") /
+            input(type="number" autocomplete="off" class="bg-white/20 w-12 py-2 text-center rounded-sm text-white text-lg" name="maxHitpoints" value=character.combatStats.maxHP) 
           p.text-2xl.text-cyan-300.flex.gap-20.items-center.justify-between Temporary Hitpoints: 
-            input(class="bg-white/20 py-2 text-center w-12 rounded-sm text-white text-lg" name="temporaryHitpoints" value=character.combatStats.temporaryHP)
+            input(type="number" autocomplete="off" class="bg-white/20 py-2 text-center w-12 rounded-sm text-white text-lg" name="temporaryHitpoints" value=character.combatStats.temporaryHP)
           p.text-2xl.text-cyan-300.flex.gap-20.items-center.justify-between Hit Dice: 
-            input(class="bg-white/20 text-center w-12 py-2 rounded-sm text-white text-lg" name="hitDice" value=character.combatStats.hitDice)
+            input(type="number" autocomplete="off" class="bg-white/20 text-center w-12 py-2 rounded-sm text-white text-lg" name="hitDice" value=character.combatStats.hitDice)
       div.third-row.flex.text-white(class="flex-row justify-center lg:justify-around lg:gap-0 gap-y-10 gap-x-20 flex-wrap mt-10")
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Strength
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm gap-2") 
             div.flex.justify-center.w-full.items-center.gap-x-6
-              input(class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="strength" value=character.abilityScores.strength)
+              input(type="number" autocomplete="off" class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="strength" value=character.abilityScores.strength)
               span(class=`${character.strengthModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.strengthModifier > 0 ? "+" + character.strengthModifier : character.strengthModifier}`})
             p(class=`${character.savingThrows.strength >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.strength > 0 ? "+" + character.savingThrows.strength : character.savingThrows.strength}`}]
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Dexterity
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm gap-2") 
             div.flex.justify-center.w-full.items-center.gap-x-6
-              input(class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="dexterity" value=character.abilityScores.dexterity)
+              input(type="number" autocomplete="off" class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="dexterity" value=character.abilityScores.dexterity)
               span(class=`${character.dexterityModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.dexterityModifier > 0 ? "+" + character.dexterityModifier : character.dexterityModifier}`})
             p(class=`${character.savingThrows.dexterity >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.dexterity > 0 ? "+" + character.savingThrows.dexterity : character.savingThrows.dexterity}`}]
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Constitution
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm gap-2") 
             div.flex.justify-center.w-full.items-center.gap-x-6
-              input(class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="constitution" value=character.abilityScores.constitution)
+              input(type="number" autocomplete="off" class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="constitution" value=character.abilityScores.constitution)
               span(class=`${character.constitutionModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.constitutionModifier > 0 ? "+" + character.constitutionModifier : character.constitutionModifier}`})
             p(class=`${character.savingThrows.constitution >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.constitution > 0 ? "+" + character.savingThrows.constitution : character.savingThrows.constitution}`}]
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Intelligence 
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm gap-2") 
             div.flex.justify-center.w-full.items-center.gap-x-6
-              input(class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="intelligence" value=character.abilityScores.intelligence)
+              input(type="number" autocomplete="off" class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="intelligence" value=character.abilityScores.intelligence)
               span(class=`${character.intelligenceModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.intelligenceModifier > 0 ? "+" + character.intelligenceModifier : character.intelligenceModifier}`})
             p(class=`${character.savingThrows.intelligence >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.intelligence > 0 ? "+" + character.savingThrows.intelligence : character.savingThrows.intelligence}`}]
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Wisdom 
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm gap-2") 
             div.flex.justify-center.w-full.items-center.gap-x-6
-              input(class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="wisdom" value=character.abilityScores.wisdom)
+              input(type="number" autocomplete="off" class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="wisdom" value=character.abilityScores.wisdom)
               span(class=`${character.wisdomModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.wisdomModifier > 0 ? "+" + character.wisdomModifier : character.wisdomModifier}`})
             p(class=`${character.savingThrows.wisdom >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.wisdom > 0 ? "+" + character.savingThrows.wisdom : character.savingThrows.wisdom}`}]
         div(class="min-w-32")
           h1.text-cyan-300(class="text-2xl lg:text-3xl text-center") Charisma
           div.flex.flex-col(class="lg:text-2xl text-lg bg-white/15 shadow-md shadow-cyan-300/30 py-2 px-4 rounded-sm gap-2") 
             div.flex.justify-center.w-full.items-center.gap-x-6
-              input(class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="charisma" value=character.abilityScores.charisma)
+              input(type="number" autocomplete="off" class="text-2xl lg:text-3xl min-w-12 max-w-16 border-none rounded-[5px] bg-white/20 text-center" name="charisma" value=character.abilityScores.charisma)
               span(class=`${character.charismaModifier >= 0 ? 'text-teal-300' : 'text-rose-400'} `)  (#{`${character.charismaModifier > 0 ? "+" + character.charismaModifier : character.charismaModifier}`})
             p(class=`${character.savingThrows.charisma >= 0 ? 'text-teal-300' : 'text-rose-400'} text-center`)  [#{`${character.savingThrows.charisma > 0 ? "+" + character.savingThrows.charisma : character.savingThrows.charisma}`}]
-      div(class="submit")
-        button(type="submit" class="w-full mt-10  bg-amber-400 py-2 text-black") Submit
+      //- div(class="submit w-full flex justify-center items-center")
+      //-   button(type="submit" class="px-8 mt-10 bg-amber-400 mx-auto py-2 text-black") Submit
+      
+      if errors
+        ul.w-full.mt-3#errorList
+          for error in errors 
+            li.my-3.py-2(class="text-center bg-rose-600/80 sm:text-xl text-base")= error.msg
 
 
   else 

@@ -277,7 +277,7 @@ exports.get_editCharacter = asyncHandler(async (req, res) => {
 
   res.render("editCharacter", {
     character,
-    title: `Edit character ${character.name}`,
+    title: `Edit character - ${character.name}`,
     allUserCharacters,
     mode: "edit",
   });
@@ -370,7 +370,18 @@ exports.post_editCharacter = [
       return true;
     })
     .escape(),
-  body("hitpoints")
+  body("currentHitpoints")
+    .trim()
+    .custom(async (value, { req }) => {
+      if (value === "" || value < 0)
+        throw new Error("'Hitpoints' must be a positive integer.");
+      else if (Number(value) > Number(req.body.maxHitpoints)) {
+        throw new Error("Current HP can't be more than max HP dummy");
+      }
+      return true;
+    })
+    .escape(),
+  body("maxHitpoints")
     .trim()
     .custom((value) => {
       if (value === "" || value < 0)
@@ -383,9 +394,11 @@ exports.post_editCharacter = [
     const errors = validationResult(req);
     const charId = req.params.id;
     const user = req.user;
-
-    // Find the character by ID
     const character = await Character.findById(charId);
+
+    const allUserCharacters = await Character?.find({
+      _id: { $in: user.characters },
+    });
 
     if (!character) {
       return res.status(404).render("error", {
@@ -394,11 +407,59 @@ exports.post_editCharacter = [
       });
     }
 
+    const tempChar = new Character(character);
+
+    tempChar.name = req.body.dndName;
+    tempChar.class = req.body.dndClass;
+    tempChar.race = req.body.dndRace;
+    tempChar.level = req.body.level;
+    tempChar.alignment = req.body.dndAlignment;
+    tempChar.inspiration = req.body.inspiration;
+    tempChar.background = req.body.background
+      ? req.body.background
+      : tempChar.background;
+    tempChar.abilityScores = {
+      strength: req.body.strength,
+      dexterity: req.body.dexterity,
+      constitution: req.body.constitution,
+      intelligence: req.body.intelligence,
+      wisdom: req.body.wisdom,
+      charisma: req.body.charisma,
+    };
+    tempChar.combatStats = {
+      armorClass: req.body.armorClass,
+      speed: req.body.speed,
+      initiative: req.body.initiative,
+      currentHP: req.body.currentHitpoints,
+      maxHP: req.body.maxHitpoints,
+      temporaryHP: req.body.temporaryHitpoints,
+      hitDice: req.body.hitDice,
+    };
+
+    // Update calculated fields
+    tempChar.proficiencyBonus = calculateProficiencyBonus(character.level);
+    tempChar.savingThrowProficiencies = decideSavingThrowsProficiencies(
+      tempChar.class
+    );
+
+    const savingThrows = {};
+    ABILITIES.forEach((ability) => {
+      savingThrows[ability] =
+        tempChar[`${ability}Modifier`] +
+        (tempChar.savingThrowProficiencies.includes(ability)
+          ? tempChar.proficiencyBonus
+          : 0);
+    });
+    tempChar.savingThrows = savingThrows;
+    tempChar.languages = decideLanguages(character.race);
+
     if (!errors.isEmpty()) {
       return res.render("editCharacter", {
-        title: "Edit Character",
+        title: `Edit Character - ${character.name}`,
         errors: errors.array(),
-        character,
+        character: tempChar,
+        allUserCharacters,
+        mode: "edit",
       });
     } else {
       try {
@@ -409,6 +470,9 @@ exports.post_editCharacter = [
         character.level = req.body.level;
         character.alignment = req.body.dndAlignment;
         character.inspiration = req.body.inspiration;
+        character.background = req.body.background
+          ? req.body.background
+          : character.background;
         character.abilityScores = {
           strength: req.body.strength,
           dexterity: req.body.dexterity,
@@ -421,8 +485,10 @@ exports.post_editCharacter = [
           armorClass: req.body.armorClass,
           speed: req.body.speed,
           initiative: req.body.initiative,
-          currentHP: req.body.hitpoints,
-          maxHP: req.body.hitpoints, // Or handle this differently if required
+          currentHP: req.body.currentHitpoints,
+          maxHP: req.body.maxHitpoints,
+          temporaryHP: req.body.temporaryHitpoints,
+          hitDice: req.body.hitDice,
         };
 
         // Update calculated fields
@@ -434,7 +500,7 @@ exports.post_editCharacter = [
         const savingThrows = {};
         ABILITIES.forEach((ability) => {
           savingThrows[ability] =
-            character.abilityScores[`${ability}`] +
+            character[`${ability}Modifier`] +
             (character.savingThrowProficiencies.includes(ability)
               ? character.proficiencyBonus
               : 0);

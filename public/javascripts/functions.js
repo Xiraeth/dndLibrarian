@@ -54,6 +54,8 @@ const decideLanguages = (race) => {
       return ["Common", "Orc"];
     case "tiefling":
       return ["Common", "Infernal"];
+    case "custom":
+      return ["Common"];
     default:
       throw new Error("Invalid race");
   }
