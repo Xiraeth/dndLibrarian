@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "characterDropdownContainer"
   );
 
-  const dropdownView = characterDropdownContainer.querySelector("span");
-
   if (characterDropdownContainer) {
+    const dropdownView = characterDropdownContainer.querySelector("span");
     const dropdownMenu =
       characterDropdownContainer.querySelector(".characterdropdown");
 
