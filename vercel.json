@@ -11,8 +11,5 @@
       "src": "/(.*)",
       "dest": "/bin/www"
     }
-  ],
-  "static": {
-    "public": "public"
-  }
+  ]
 }
