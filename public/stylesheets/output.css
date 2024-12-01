@@ -955,6 +955,50 @@ input[type="number"]::-webkit-inner-spin-button,
   max-width: 4rem;
 }
 
+@keyframes rainbowColor {
+  0%, 100% {
+    color: orange;
+  }
+
+  14% {
+    color: yellow;
+  }
+
+  28% {
+    color: green;
+  }
+
+  42% {
+    color: cyan;
+  }
+
+  57% {
+    color: blue;
+  }
+
+  71% {
+    color: violet;
+  }
+
+  85% {
+    color: red;
+  }
+}
+
+.animate-rainbowColor {
+  animation: rainbowColor 7s linear infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -1495,12 +1539,6 @@ input[type="number"]::-webkit-inner-spin-button,
 
 .duration-300 {
   transition-duration: 300ms;
-}
-
-.hover\:scale-50:hover {
-  --tw-scale-x: .5;
-  --tw-scale-y: .5;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .hover\:scale-110:hover {
