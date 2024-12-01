@@ -124,7 +124,4 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-module.exports = (req, res) => {
-  const app = require("./app");
-  app(req, res);
-};
+module.exports = app;
