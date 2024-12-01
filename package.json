@@ -6,8 +6,8 @@
     "node": ">=16.17.1"
   },
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "dev": "set DEBUG=myapp:* & npm start",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "tw": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch"
   },
   "dependencies": {
