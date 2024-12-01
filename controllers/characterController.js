@@ -68,6 +68,14 @@ exports.post_createCharacter = [
     })
     .escape(),
   body("dndAlignment", "Alignment field cannot be blank").escape(),
+  body("dndBackground")
+    .trim()
+    .custom((value) => {
+      if (value.length > 24)
+        throw new Error("Background text can be up to 24 characters long");
+      return true;
+    })
+    .escape(),
   body("strengthInput")
     .trim()
     .custom((value) => {
@@ -304,6 +312,14 @@ exports.post_editCharacter = [
     })
     .escape(),
   body("dndAlignment", "Alignment field cannot be blank").escape(),
+  body("background")
+    .trim()
+    .custom((value) => {
+      if (value.length > 24)
+        throw new Error("Background text can be up to 24 characters long");
+      return true;
+    })
+    .escape(),
   body("strength")
     .trim()
     .custom((value) => {

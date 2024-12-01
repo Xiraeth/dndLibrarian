@@ -15,35 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const createCharButton = document.querySelector("#createCharButton");
   const createCharForm = document.querySelector("#createCharForm");
 
-  const errorList = document.querySelector("#errorList");
-
-  window.addEventListener("load", (e) => {
-    if (!createCharForm || !errorList) return;
-
-    const buttonsArray = Array.from(tabsButtons);
-
-    const targetTab =
-      buttonsArray.find(
-        (button) =>
-          button.dataset.name === sessionStorage.getItem("activeTabButtonName")
-      ) || "";
-    if (!targetTab) return;
-
-    tabsButtons.forEach((button) => {
-      button.classList.remove("activeTab");
-      button.style.removeProperty("background-color");
-      button.style.removeProperty("color");
-    });
-
-    targetTab.style.backgroundColor = tabActiveBgColor;
-    targetTab.style.color = "white";
-    targetTab.classList.add("activeTab");
-
-    allTabs.forEach((tab) => tab.classList.add("hidden"));
-    const divToShow = document.querySelector(`#${targetTab.dataset.name}`);
-    divToShow.classList.remove("hidden");
-  });
-
   // change active tab
   if (createCharForm) {
     tabsContainer.addEventListener("click", (e) => {
@@ -62,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
       targetTab.style.color = "white";
       targetTab.classList.add("activeTab");
 
-      sessionStorage.setItem("activeTabButtonName", tabName);
+      localStorage.setItem("activeTabButtonName", tabName);
 
       allTabs.forEach((tab) => tab.classList.add("hidden"));
 
