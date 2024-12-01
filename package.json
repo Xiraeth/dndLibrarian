@@ -6,7 +6,8 @@
     "node": ">=16.17.1"
   },
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "live": "nodemon app.js",
+    "start": "node app.js",
     "dev": "set DEBUG=myapp:* & npm start",
     "tw": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch"
   },
