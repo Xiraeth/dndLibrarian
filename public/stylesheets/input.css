@@ -190,7 +190,6 @@
 
   #editCharacterForm select {
     color: white;
-    min-width: 200px;
     background-color: transparent;
     padding: 5px 10px;
     outline: none;
