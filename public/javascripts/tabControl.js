@@ -1,7 +1,6 @@
 "use strict";
 
-const tabMainBgColor = "#fcd34d";
-const tabActiveBgColor = "#008080";
+const tabActiveBgColor = "#6366f1";
 
 document.addEventListener("DOMContentLoaded", function () {
   const allInputs = document.querySelectorAll("#createCharForm input");
@@ -16,33 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const createCharButton = document.querySelector("#createCharButton");
   const createCharForm = document.querySelector("#createCharForm");
 
-  const errorList = document.querySelector("#errorList");
-
-  window.addEventListener("load", (e) => {
-    if (!createCharForm || !errorList) return;
-
-    const buttonsArray = Array.from(tabsButtons);
-
-    const targetTab =
-      buttonsArray.find(
-        (button) =>
-          button.dataset.name === sessionStorage.getItem("activeTabButtonName")
-      ) || "";
-    if (!targetTab) return;
-
-    tabsButtons.forEach((button) => {
-      button.classList.remove("activeTab");
-      button.style.backgroundColor = tabMainBgColor;
-    });
-
-    targetTab.style.backgroundColor = tabActiveBgColor;
-    targetTab.classList.add("activeTab");
-
-    allTabs.forEach((tab) => tab.classList.add("hidden"));
-    const divToShow = document.querySelector(`#${targetTab.dataset.name}`);
-    divToShow.classList.remove("hidden");
-  });
-
   // change active tab
   if (createCharForm) {
     tabsContainer.addEventListener("click", (e) => {
@@ -53,13 +25,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       tabsButtons.forEach((button) => {
         button.classList.remove("activeTab");
-        button.style.backgroundColor = tabMainBgColor;
+        button.style.removeProperty("background-color");
+        button.style.removeProperty("color");
       });
 
-      targetTab.style.backgroundColor = tabActiveBgColor;
+      targetTab.style.setProperty("background-color", tabActiveBgColor);
+      targetTab.style.color = "white";
       targetTab.classList.add("activeTab");
 
-      sessionStorage.setItem("activeTabButtonName", tabName);
+      localStorage.setItem("activeTabButtonName", tabName);
 
       allTabs.forEach((tab) => tab.classList.add("hidden"));
 
@@ -99,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function flashButton(button) {
   button.style.backgroundColor = "crimson";
   setTimeout(function () {
-    button.style.backgroundColor = tabMainBgColor;
+    button.style.removeProperty("background-color");
     if (button.classList.contains("activeTab")) {
       button.style.backgroundColor = tabActiveBgColor;
     }

@@ -3,33 +3,55 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/output.css')
-    script(src="/javascripts/tabControl.js" defer)
+    script(src="/javascripts/tabControl.js" type="module" defer)
     script(src="/javascripts/deleteCharacterControl.js" defer)
     script(src="/javascripts/dropdownControl.js" defer)
+    script(src="/javascripts/navbar.js" defer)
     script(src="/javascripts/editCharForm.js" defer)
     script(src="https://kit.fontawesome.com/00de2a7224.js" crossorigin="anonymous")
-  body(class="text-white bg-[url('/images/bg.jpg')] bg-no-repeat bg-fixed sm:bg-center")
-    div(class="header py-8 px-10 flex justify-between items-center")
-      div(class="flex items-center justify-between gap-8 h-[40px]")
-        a(href="/" class="lg:text-3xl text-xl font-cactus text-amber-300 hover:text-amber-400 transition-colors duration-150") Home
-        if character
-          div#characterDropdownContainer(class="relative h-[40px] w-[100px] flex items-center justify-center cursor-pointer")
-            span(class="text-indigo-300 bg-transparent h-[40px] w-[100px] transition-all border-2 border-indigo-500 flex items-center justify-center hover:text-black duration-150 hover:bg-indigo-500") #{character.name}
-            div.characterdropdown(class="absolute top-[100%] left-0 bg-indigo-400 w-full hidden shadow-md overflow-hidden z-10")
-              for char in allUserCharacters
-                div(class="w-full border-b-[1px] border-b-black text-center py-2 text-black hover:bg-indigo-500 transition-all duration-150") 
-                  a(href=`/myCharacters/${char._id}` class="block w-full h-full") #{char.name}
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(charset="urf-8")
+
+  body(class="text-white bg-[url('/images/bg.jpg')] bg-no-repeat bg-fixed md:bg-center pb-10")
+    div(id="navbarLeft" class="fixed top-0 bottom-0 left-0 bg-black/90 w-[128px] -translate-x-[128px] flex transition-all duration-150 z-10 flex-col items-center")
+      i(id="closeNavbar" class="fa-solid fa-close text-red-600 text-4xl py-6 cursor-pointer w-full text-center hover:bg-white/20 active:bg-white/25transition-all duration-150")
+      a(href="/" class="text-amber-400 text-lg border-y-[1px] border-y-white w-full text-center py-6 hover:bg-white/20 active:bg-white/25 transition-all duration-150") Home
+      if allUserCharacters
+        for char in allUserCharacters
+          a(href=`/myCharacters/${char._id}` class="border-b-[1px] text-indigo-400 w-full border-b-white text-center py-6 hover:bg-white/20 active:bg-white/25 transition-all duration-150")= char.name
+    div(class="header py-8 px-4 flex justify-between items-center w-full")
+      div(class="items-center justify-between gap-8 h-[40px] hidden sm:flex")
+        a(href="/" class="lg:text-3xl font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150") Home
+        if character && allUserCharacters
+          div#characterDropdownContainer(class="relative sm:flex hidden select-none h-[40px] w-[140px] items-center justify-center cursor-pointer")
+            span(class="text-indigo-300 bg-transparent h-[40px] w-[140px] transition-all border-2 border-indigo-500 flex items-center justify-center gap-2 hover:text-black duration-150 hover:bg-indigo-500") Characters
+              i(class="fa-solid fa-chevron-down text-sm")
+            div.characterdropdown(class="absolute top-[100%] border-t-[1px] border-t-black left-0 bg-indigo-400 w-full hidden shadow-md overflow-hidden z-10")
+              if allUserCharacters
+                for char in allUserCharacters
+                  div(class="w-full border-b-[1px] border-b-black text-center py-2 text-black hover:bg-indigo-500 transition-all duration-150") 
+                    a(href=`/myCharacters/${char._id}` class="block w-full h-full") #{char.name}
+      //- if character
+      //-   div#characterTabsContainer.flex.gap-6
+      //-     button(class="bg-transparent border-b-2 border-b-black rounded-none activeSection xl:text-2xl text-lg") Main
+      //-     button(class="bg-transparent border-b-2 border-b-black rounded-none xl:text-2xl text-lg") Personality
+      //-     button(class="bg-transparent border-b-2 border-b-black rounded-none xl:text-2xl text-lg") Spells
       if currentUser 
-        div#connectButtons(class="text-lg lg:text-2xl flex gap-10")
+        div#connectButtons(class="text-lg lg:text-2xl flex gap-10 justify-end items-center w-full")
           if character
             if mode === 'edit'
-              a(href=`/myCharacters/${character._id}`  class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150") Cancel
+              p(id="openNavbar" class="sm:ml-auto text-amber-400 text-2xl sm:hidden block cursor-pointer")
+                i(id="openNavbar" class="w-full h-full fa-solid fa-bars")
+              a(href=`#` id="submitEditCharForm" class="ml-auto font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150 xl:text-2xl text-lg") Save
+              a(href=`/myCharacters/${character._id}` class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150 xl:text-2xl text-lg") Cancel
             else
-              a(href=`/editCharacter/${character._id}` class="font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150") Edit
-              a(href="#" id="deleteButtonShowModal" class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150") Delete
-          a(href="/logout" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Logout
+              p(id="openNavbar" class="sm:ml-auto text-amber-400 text-2xl sm:hidden block cursor-pointer")
+                i(id="openNavbar" class="w-full h-full fa-solid fa-bars")
+              a(href=`/editCharacter/${character._id}` class="ml-auto sm:ml-0 font-cactus text-amber-400 hover:text-amber-500 transition-colors duration-150 xl:text-2xl text-lg") Edit
+              a(href="#" id="deleteButtonShowModal" class="font-cactus text-rose-500 hover:text-rose-600 transition-colors duration-150 xl:text-2xl text-lg") Delete
+          a(href="/logout" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150 xl:text-2xl text-lg") Logout
       else
-        div#connectButtons(class="text-lg lg:text-2xl flex gap-10")
-          a(href="/login" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Log in
-          a(href="/signup" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150") Sign up
+        div#connectButtons(class=`text-lg lg:text-2xl flex gap-10 justify-between sm:w-auto w-full`)
+          a(href="/login" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150 xl:text-2xl text-lg") Log in
+          a(href="/signup" class="font-cactus text-blue-300 hover:text-blue-500 transition-colors duration-150 xl:text-2xl text-lg") Sign up
     block content

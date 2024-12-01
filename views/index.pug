@@ -2,13 +2,13 @@ extends layout
 
 block content
   if currentUser 
-    p.text-center.font-bold.text-amber-300.italic.mb-20(class="xl:text-5xl sm:text-3xl text-2xl") Welcome back, #{currentUser.username}
+    p.text-center.font-bold.text-amber-400.italic.mb-20(class="xl:text-5xl sm:text-3xl text-2xl") Welcome back, #{currentUser.username}
     if characters.length 
-      p.text-4xl.text-emerald-400.text-center.mb-10 You currently have the following characters:
+      p.text-emerald-400.text-center.mb-10(class="xl:text-3xl lg:text-2xl text-xl") You currently have the following characters:
       div#myCharactersContainer(class="w-11/12 mx-auto flex flex-wrap gap-20 justify-center")
         for character in characters
-          a(href=`/myCharacters/${character._id}` class="bg-blue-400/80 hover:bg-blue-400/90 text-black rounded-lg characterContainer flex flex-col justify-between items-center gap-5 p-5 min-w-32 w-1/6 text-center xl:text-2xl sm:text-lg text-base font-mont cursor-pointer outline outline-2 outline-black shadow-md shadow-emerald-200/40 hover:shadow-emerald-200/60  transition-all duration-150 min-h-40")
-            h1(class="xl:text-4xl sm:text-2xl text-lg font-bold")= character.name
+          a(href=`/myCharacters/${character._id}` class="bg-indigo-400 hover:bg-indigo-500 text-black rounded-lg characterContainer flex flex-col justify-between items-center gap-5 p-5 min-w-32 w-1/6 text-center xl:text-2xl sm:text-lg text-base font-mont cursor-pointer outline outline-2 outline-black shadow-md shadow-amber-300/70 hover:shadow-lg hover:shadow-amber-400/90 hover:scale-110 transition-all duration-300 min-h-40")
+            h1(class="xl:text-4xl sm:text-2xl text-lg font-bold font-cactus underline")= character.name
             h2 #{character.race} #{character.class}
             h3 Level #{character.level} 
     else
@@ -18,5 +18,5 @@ block content
   else
     div#welcomeMsg.text-white.text-center.font-cactus.flex.flex-col.items-center.gap-10.mt-20.px-5(class="xl:text-3xl sm:text-lg text-base")
       p Welcome to #[i The Librarian], an application to store and view your D&amp;D characters
-      p.text-5xl.font-bold.pointer-events-none.select-none.text-amber-300.italic Work in Progress
+      p.text-5xl.font-bold.pointer-events-none.select-none.text-amber-300.italic.animate-rainbowColor Work in Progress
   

@@ -3,7 +3,6 @@ const calculateProficiencyBonus = (level) => {
 };
 
 const decideSavingThrowsProficiencies = (dndClass) => {
-  console.log(dndClass);
   switch (dndClass?.toLowerCase()) {
     case "barbarian":
       return ["strength", "constitution"];
@@ -54,6 +53,8 @@ const decideLanguages = (race) => {
       return ["Common", "Orc"];
     case "tiefling":
       return ["Common", "Infernal"];
+    case "custom":
+      return ["Common"];
     default:
       throw new Error("Invalid race");
   }

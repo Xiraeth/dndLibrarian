@@ -1,9 +1,12 @@
+const indigoHover = "#6366f1";
+
 document.addEventListener("DOMContentLoaded", function () {
   const characterDropdownContainer = document.getElementById(
     "characterDropdownContainer"
   );
 
   if (characterDropdownContainer) {
+    const dropdownView = characterDropdownContainer.querySelector("span");
     const dropdownMenu =
       characterDropdownContainer.querySelector(".characterdropdown");
 
@@ -18,6 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Toggle current dropdown
       dropdownMenu.style.display = isVisible ? "none" : "block";
+      if (isVisible) {
+        dropdownView.style.removeProperty("background-color");
+        dropdownView.style.removeProperty("color");
+        dropdownView.classList.remove("isDropdownOpen");
+      } else {
+        dropdownView.style.setProperty("background-color", indigoHover);
+        dropdownView.style.setProperty("color", "black");
+        dropdownView.classList.add("isDropdownOpen");
+      }
     });
 
     // Close the dropdown when clicking outside
