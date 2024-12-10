@@ -10,6 +10,7 @@ const logger = require("morgan");
 const bcrypt = require("bcryptjs");
 const compression = require("compression");
 const helmet = require("helmet");
+const MongoStore = require("connect-mongo");
 
 const indexRouter = require("./routes/index");
 const loginRouter = require("./routes/login");
@@ -52,7 +53,11 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET || "cats",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+      ttl: 24 * 60 * 60, // Session TTL in seconds (1 day)
+    }),
     cookie: {
       secure: process.env.NODE_ENV === "production",
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
