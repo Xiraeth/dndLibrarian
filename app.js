@@ -31,9 +31,16 @@ mongoose.set("strictQuery", false);
 const mongoDbUrl = process.env.DB_URI;
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+    socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
+    connectTimeoutMS: 10000, // Give up initial connection after 10s
+  })
   .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    console.log("MongoDB URI:", process.env.MONGODB_URI); // This will help debug the connection string
+  });
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
