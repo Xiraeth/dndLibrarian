@@ -6,9 +6,10 @@
     "node": ">=16.17.1"
   },
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "dev": "set DEBUG=myapp:* & npm start",
-    "tw": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "tw": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch",
+    "build": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -16,6 +17,7 @@
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.4.5",
+    "eslint": "^9.16.0",
     "express": "~4.16.1",
     "express-async-handler": "^1.2.0",
     "express-session": "^1.18.0",
