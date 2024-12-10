@@ -40,11 +40,16 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 // passport session setup
+// Update session configuration
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "default_secret",
+    secret: process.env.SESSION_SECRET || "cats",
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 1000 * 60 * 60 * 24, // 24 hours
+    },
   })
 );
 app.use(passport.session());
