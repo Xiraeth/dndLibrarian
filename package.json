@@ -6,9 +6,10 @@
     "node": ">=16.17.1"
   },
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "tw": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "tw": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch",
+    "build": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
