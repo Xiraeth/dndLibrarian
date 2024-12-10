@@ -30,10 +30,10 @@ const User = require("./models/user");
 mongoose.set("strictQuery", false);
 const mongoDbUrl = process.env.DB_URI;
 
-async function main() {
-  await mongoose.connect(mongoDbUrl);
-}
-main().catch((err) => console.log(err));
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
